@@ -1,0 +1,356 @@
+core   0: 0x00001000 (0x00000297) auipc   t0, 0x0
+core   0: 0x00001004 (0x02028593) addi    a1, t0, 32
+core   0: 0x00001008 (0xf1402573) csrr    a0, mhartid
+core   0: 0x0000100c (0x0182a283) lw      t0, 24(t0)
+core   0: 0x00001010 (0x00028067) jr      t0
+core   0: >>>>  $xrv32i2p1_m2p0_f2p2_d2p2_v1p0_zicsr2p0_zmmul1p0_zve32f1p0_zve32x1p0_zve64d1p0_zve64f1p0_zve64x1p0_zvl128b1p0_zvl32b1p0_zvl64b1p0
+core   0: 0x12000000 (0x60000293) li      t0, 1536
+core   0: 0x12000004 (0x3002a073) csrs    mstatus, t0
+core   0: 0x12000008 (0xe2100013) li      zero, -479
+core   0: 0x1200000c (0xf9200293) li      t0, -110
+core   0: 0x12000010 (0x0ac00313) li      t1, 172
+core   0: 0x12000014 (0x33200393) li      t2, 818
+core   0: 0x12000018 (0x50000413) li      s0, 1280
+core   0: 0x1200001c (0x15000493) li      s1, 336
+core   0: 0x12000020 (0xfc300513) li      a0, -61
+core   0: 0x12000024 (0x27c00593) li      a1, 636
+core   0: 0x12000028 (0x53e00613) li      a2, 1342
+core   0: 0x1200002c (0x05600693) li      a3, 86
+core   0: 0x12000030 (0x2d500793) li      a5, 725
+core   0: 0x12000034 (0x11f00813) li      a6, 287
+core   0: 0x12000038 (0x49900913) li      s2, 1177
+core   0: 0x1200003c (0xde100993) li      s3, -543
+core   0: 0x12000040 (0xfa000a13) li      s4, -96
+core   0: 0x12000044 (0xa0f00a93) li      s5, -1521
+core   0: 0x12000048 (0x52600b13) li      s6, 1318
+core   0: 0x1200004c (0x46400b93) li      s7, 1124
+core   0: 0x12000050 (0x10600c13) li      s8, 262
+core   0: 0x12000054 (0xef600c93) li      s9, -266
+core   0: 0x12000058 (0x98300d13) li      s10, -1661
+core   0: 0x1200005c (0x47700e13) li      t3, 1143
+core   0: 0x12000060 (0x5c900e93) li      t4, 1481
+core   0: 0x12000064 (0xbc100f93) li      t6, -1087
+core   0: 0x12000068 (0x20002f37) lui     t5, 0x20002
+core   0: 0x1200006c (0x000f0f13) mv      t5, t5
+core   0: 0x12000070 (0x12000737) lui     a4, 0x12000
+core   0: 0x12000074 (0x4e870713) addi    a4, a4, 1256
+core   0: 0x12000078 (0x120008b7) lui     a7, 0x12000
+core   0: 0x1200007c (0x09c88893) addi    a7, a7, 156
+core   0: 0x12000080 (0x0d000d93) li      s11, 208
+core   0: 0x12000084 (0x0930f457) vsetvli s0, ra, e32, m8, tu, ma
+core   0: 0x12000088 (0x5e05c057) vmv.v.x v0, a1
+core   0: 0x1200008c (0x5e00c457) vmv.v.x v8, ra
+core   0: 0x12000090 (0x5e054857) vmv.v.x v16, a0
+core   0: 0x12000094 (0x5e07cc57) vmv.v.x v24, a5
+core   0: 0x12000098 (0x0180006f) j       pc + 0x18
+core   0: >>>>  body
+core   0: 0x120000b0 (0x000f5427) vse16.v v8, (t5), v0.t
+core   0: 0x120000b4 (0x02df7e33) remu    t3, t5, a3
+core   0: 0x120000b8 (0x010f0107) vle8ff.v v2, (t5), v0.t
+core   0: 0x120000bc (0x000f0f27) vse8.v  v30, (t5), v0.t
+core   0: 0x120000c0 (0x03974a33) div     s4, a4, s9
+core   0: 0x120000c4 (0x908bec57) vmulhu.vx v24, v8, s7, v0.t
+core   0: 0x120000c8 (0x7f6a0797) auipc   a5, 0x7f6a0
+core   0: >>>>  label7
+core   0: 0x120000cc (0x05357ed7) vsetvli t4, a0, e32, m8, ta, mu
+core   0: >>>>  label8
+core   0: 0x120000d0 (0x0c67f2d7) vsetvli t0, a5, e8, mf4, ta, ma
+core   0: 0x120000d4 (0x01ce7ab3) and     s5, t3, t3
+core   0: 0x120000d8 (0x85256f57) vdiv.vx v30, v18, a0, v0.t
+core   0: 0x120000dc (0xcdbf1e23) sh      s11, -804(t5)
+core   0: 0x120000e0 (0x02241a33) mulh    s4, s0, sp
+core   0: 0x120000e4 (0x4a9034b7) lui     s1, 0x4a903
+core   0: 0x120000e8 (0x0392a933) mulhsu  s2, t0, s9
+core   0: 0x120000ec (0x009b0ab3) add     s5, s6, s1
+core   0: >>>>  label16
+core   0: 0x120000f0 (0x81bc75d7) vsetvl  a1, s8, s11
+core   0: 0x120000f4 (0x9d53ea57) vmulh.vx v20, v21, t2, v0.t
+core   0: 0x120000f8 (0x462e0f57) vmadc.vv v30, v2, v28
+core   0: 0x120000fc (0x02b05033) divu    zero, zero, a1
+core   0: >>>>  label20
+core   0: 0x12000100 (0xc0a17b57) vsetivli s6, 2, e16, m4, tu, mu
+core   0: 0x12000104 (0x40885333) sra     t1, a6, s0
+core   0: >>>>  label22
+core   0: 0x12000108 (0x81bffb57) vsetvl  s6, t6, s11
+core   0: >>>>  label23
+core   0: 0x1200010c (0xcc087e57) vsetivli t3, 16, e8, m1, ta, ma
+core   0: 0x12000110 (0x02bf0707) vlm.v   v14, (t5)
+core   0: 0x12000114 (0x030f0807) vle8ff.v v16, (t5)
+core   0: 0x12000118 (0x83a42c13) slti    s8, s0, -1990
+core   0: 0x1200011c (0xe2e5ad57) vwmulu.vv v26, v14, v11
+core   0: 0x12000120 (0x61eec9d7) vmseq.vx v19, v30, t4, v0.t
+core   0: >>>>  label29
+core   0: 0x12000124 (0xac436757) vnmsub.vx v14, t1, v4, v0.t
+core   0: 0x12000128 (0xc6ae2b93) slti    s7, t3, -918
+core   0: >>>>  label31
+core   0: 0x1200012c (0xcc08f4d7) vsetivli s1, 17, e8, m1, ta, ma
+core   0: 0x12000130 (0x020f6607) vle32.v v12, (t5)
+core   0: 0x12000134 (0x5e0943d7) vmv.v.x v7, s2
+core   0: 0x12000138 (0x0335d033) divu    zero, a1, s3
+core   0: 0x1200013c (0x2b4b1497) auipc   s1, 0x2b4b1
+core   0: 0x12000140 (0x016b6cb3) or      s9, s6, s6
+core   0: >>>>  label37
+core   0: 0x12000144 (0xccf27bd7) vsetivli s7, 4, e16, mf2, ta, ma
+core   0: 0x12000148 (0x64808b57) vmsne.vv v22, v8, v1, v0.t
+core   0: 0x1200014c (0x000f67a7) vse32.v v15, (t5), v0.t
+core   0: 0x12000150 (0x02abd433) divu    s0, s7, a0
+core   0: 0x12000154 (0x47ee3fd7) vmadc.vi v31, v30, -4
+core   0: 0x12000158 (0x184e4fd7) vmaxu.vx v31, v4, t3, v0.t
+core   0: 0x1200015c (0x045d5063) bge     s10, t0, pc + 64
+core   0: 0x12000160 (0xc8966457) vwsubu.vx v8, v9, a2, v0.t
+core   0: 0x12000164 (0xb91f09a3) sb      a7, -1133(t5)
+core   0: 0x12000168 (0xb719bfb7) lui     t6, 0xb719b
+core   0: 0x1200016c (0x621d43d7) vmseq.vx v7, v1, s10
+core   0: 0x12000170 (0x034b53b3) divu    t2, s6, s4
+core   0: 0x12000174 (0xb2643ed7) vnsrl.wi v29, v6, 8
+core   0: 0x12000178 (0x40b98157) vadc.vvm v2, v11, v19, v0
+core   0: 0x1200017c (0x7d00bed7) vmsgt.vi v29, v16, 1, v0.t
+core   0: 0x12000180 (0x02f68d33) mul     s10, a3, a5
+core   0: 0x12000184 (0x01282533) slt     a0, a6, s2
+core   0: 0x12000188 (0xdf49e5d7) vwsub.wx v11, v20, s3
+core   0: 0x1200018c (0x24a3cfd7) vand.vx v31, v10, t2, v0.t
+core   0: 0x12000190 (0x72313ad7) vmsleu.vi v21, v3, 2
+core   0: 0x12000194 (0xceec2357) vwsub.vv v6, v14, v24
+core   0: 0x12000198 (0x02ad4cb3) div     s9, s10, a0
+core   0: >>>>  label59
+core   0: 0x1200019c (0x020f0907) vle8.v  v18, (t5)
+core   0: 0x120001a0 (0x020f0727) vse8.v  v14, (t5)
+core   0: 0x120001a4 (0x732f2223) sw      s2, 1828(t5)
+core   0: 0x120001a8 (0x02c76533) rem     a0, a4, a2
+core   0: 0x120001ac (0x020f6527) vse32.v v10, (t5)
+core   0: >>>>  label64
+core   0: 0x120001b0 (0x0022fed7) vsetvli t4, t0, e8, m4, tu, mu
+core   0: >>>>  label65
+core   0: 0x120001b4 (0x81b57bd7) vsetvl  s7, a0, s11
+core   0: 0x120001b8 (0x77c23257) vmsle.vi v4, v28, 4
+core   0: 0x120001bc (0x62d6bcb7) lui     s9, 0x62d6b
+core   0: 0x120001c0 (0x60cf2623) sw      a2, 1548(t5)
+core   0: 0x120001c4 (0x7f2fc7d7) vmsgt.vx v15, v18, t6
+core   0: >>>>  label70
+core   0: 0x120001c8 (0xcd18f557) vsetivli a0, 17, e32, m2, ta, ma
+core   0: 0x120001cc (0x001fefb3) or      t6, t6, ra
+core   0: >>>>  label72
+core   0: 0x120001d0 (0x0c1673d7) vsetvli t2, a2, e8, m2, ta, ma
+core   0: 0x120001d4 (0x00b59b13) slli    s6, a1, 11
+core   0: 0x120001d8 (0x298f2583) lw      a1, 664(t5)
+core   0: 0x120001dc (0x020f6007) vle32.v v0, (t5)
+core   0: 0x120001e0 (0x01d09a93) slli    s5, ra, 29
+core   0: 0x120001e4 (0xcfcf2f83) lw      t6, -772(t5)
+core   0: 0x120001e8 (0x24490357) vand.vv v6, v4, v18, v0.t
+core   0: 0x120001ec (0x102fcd37) lui     s10, 0x102fc
+core   0: 0x120001f0 (0x4d450957) vmsbc.vvm v18, v20, v10, v0
+core   0: 0x120001f4 (0x2b2bc957) vor.vx  v18, v18, s7
+core   0: 0x120001f8 (0x0cef2a23) sw      a4, 212(t5)
+core   0: 0x120001fc (0x2d6fbd57) vxor.vi v26, v22, -1, v0.t
+core   0: >>>>  label84
+core   0: 0x12000200 (0xcc7d77d7) vsetivli a5, 26, e8, mf2, ta, ma
+core   0: 0x12000204 (0x0259d6b3) divu    a3, s3, t0
+core   0: 0x12000208 (0x02bf0707) vlm.v   v14, (t5)
+core   0: 0x1200020c (0xa4af06d7) vsra.vv v13, v10, v30, v0.t
+core   0: 0x12000210 (0x4ad68d13) addi    s10, a3, 1197
+core   0: >>>>  label89
+core   0: 0x12000214 (0x0c22fcd7) vsetvli s9, t0, e8, m4, ta, ma
+core   0: 0x12000218 (0xf4402457) vwmacc.vv v8, v0, v4, v0.t
+core   0: 0x1200021c (0x72721997) auipc   s3, 0x72721
+core   0: >>>>  label92
+core   0: 0x12000220 (0xc12ef357) vsetivli t1, 29, e32, m4, tu, mu
+core   0: 0x12000224 (0x41c65fb3) sra     t6, a2, t3
+core   0: 0x12000228 (0x760a0057) vmsle.vv v0, v0, v20
+core   0: 0x1200022c (0x01f31493) slli    s1, t1, 31
+core   0: 0x12000230 (0x45c9b257) vmadc.vim v4, v28, -13, v0
+core   0: 0x12000234 (0x0c45c457) vrsub.vx v8, v4, a1, v0.t
+core   0: 0x12000238 (0xc5d8b513) sltiu   a0, a7, -931
+core   0: >>>>  label99
+core   0: 0x1200023c (0x0502fe57) vsetvli t3, t0, e32, m1, ta, mu
+core   0: 0x12000240 (0x7e0f2823) sw      zero, 2032(t5)
+core   0: 0x12000244 (0x12c649d7) vminu.vx v19, v12, a2
+core   0: 0x12000248 (0x76576e17) auipc   t3, 0x76576
+core   0: 0x1200024c (0x01def663) bgeu    t4, t4, pc + 12
+core   0: >>>>  label106
+core   0: 0x12000258 (0x08fa7457) vsetvli s0, s4, e16, mf2, tu, ma
+core   0: 0x1200025c (0x6cbbc7d7) vmslt.vx v15, v11, s7, v0.t
+core   0: 0x12000260 (0x030f0207) vle8ff.v v4, (t5)
+core   0: 0x12000264 (0xddbd20d7) vwsub.wv v1, v27, v26, v0.t
+core   0: 0x12000268 (0x913a2157) vmulhu.vv v2, v19, v20, v0.t
+core   0: 0x1200026c (0x03a54e33) div     t3, a0, s10
+core   0: 0x12000270 (0x01ce9c13) slli    s8, t4, 28
+core   0: 0x12000274 (0x010f0587) vle8ff.v v11, (t5), v0.t
+core   0: 0x12000278 (0x000f63a7) vse32.v v7, (t5), v0.t
+core   0: >>>>  label115
+core   0: 0x1200027c (0xc476f857) vsetivli a6, 13, e8, mf2, ta, mu
+core   0: 0x12000280 (0x5c145937) lui     s2, 0x5c145
+core   0: 0x12000284 (0x2e3a4057) vxor.vx v0, v3, s4
+core   0: 0x12000288 (0xa6b32e57) vmadd.vv v28, v6, v11
+core   0: >>>>  label119
+core   0: 0x1200028c (0x4d464b57) vmsbc.vxm v22, v20, a2, v0
+core   0: 0x12000290 (0x030f0407) vle8ff.v v8, (t5)
+core   0: 0x12000294 (0x4f154757) vmsbc.vx v14, v17, a0
+core   0: 0x12000298 (0x63ed42d7) vmseq.vx v5, v30, s10
+core   0: 0x1200029c (0xbec6a1d7) vnmsac.vv v3, v13, v12
+core   0: 0x120002a0 (0x4e844ed7) vmsbc.vx v29, v8, s0
+core   0: 0x120002a4 (0xf13862d7) vwmaccu.vx v5, a6, v19, v0.t
+core   0: 0x120002a8 (0x008b5333) srl     t1, s6, s0
+core   0: 0x120002ac (0x5d97c557) vmerge.vxm v10, v25, a5, v0
+core   0: 0x120002b0 (0x46ef09a3) sb      a4, 1139(t5)
+core   0: 0x120002b4 (0x01255cb3) srl     s9, a0, s2
+core   0: 0x120002b8 (0x010f5107) vle16ff.v v2, (t5), v0.t
+core   0: 0x120002bc (0x02bf0ba7) vsm.v   v23, (t5)
+core   0: 0x120002c0 (0x44ef2e23) sw      a4, 1116(t5)
+core   0: 0x120002c4 (0xe0fb2ed7) vwmulu.vv v29, v15, v22, v0.t
+core   0: 0x120002c8 (0x000f0c27) vse8.v  v24, (t5), v0.t
+core   0: >>>>  label135
+core   0: 0x120002cc (0x00bafe57) vsetvli t3, s5, e16, m8, tu, mu
+core   0: 0x120002d0 (0x628a4857) vmseq.vx v16, v8, s4
+core   0: 0x120002d4 (0x97040057) vsll.vv v0, v16, v8
+core   0: 0x120002d8 (0x010f5c07) vle16ff.v v24, (t5), v0.t
+core   0: 0x120002dc (0x02f82eb3) mulhsu  t4, a6, a5
+core   0: 0x120002e0 (0x2685c457) vand.vx v8, v8, a1
+core   0: 0x120002e4 (0xe04f2c23) sw      tp, -488(t5)
+core   0: 0x120002e8 (0x8c842c57) vrem.vv v24, v8, v8, v0.t
+core   0: 0x120002ec (0x95806c57) vmul.vx v24, v24, zero, v0.t
+core   0: 0x120002f0 (0x798f1523) sh      s8, 1930(t5)
+core   0: 0x120002f4 (0x9a882457) vmulhsu.vv v8, v8, v16
+core   0: 0x120002f8 (0x41078a33) sub     s4, a5, a6
+core   0: 0x120002fc (0xa706b637) lui     a2, 0xa706b
+core   0: 0x12000300 (0x036463b3) rem     t2, s0, s6
+core   0: >>>>  label149
+core   0: 0x12000304 (0x19040c57) vmaxu.vv v24, v16, v8, v0.t
+core   0: 0x12000308 (0x6e040457) vmslt.vv v8, v0, v8
+core   0: 0x1200030c (0x11040457) vminu.vv v8, v16, v8, v0.t
+core   0: 0x12000310 (0x03647033) remu    zero, s0, s6
+core   0: 0x12000314 (0x02d642b3) div     t0, a2, a3
+core   0: 0x12000318 (0x02bf0e87) vlm.v   v29, (t5)
+core   0: 0x1200031c (0x79bf0783) lb      a5, 1947(t5)
+core   0: 0x12000320 (0x5e0b3457) vmv.v.i v8, -10
+core   0: 0x12000324 (0x8a882857) vremu.vv v16, v8, v16
+core   0: 0x12000328 (0x5d81bc57) vmerge.vim v24, v24, 3, v0
+core   0: 0x1200032c (0x9d84e857) vmulh.vx v16, v24, s1, v0.t
+core   0: >>>>  label160
+core   0: 0x12000330 (0x0067f357) vsetvli t1, a5, e8, mf4, tu, mu
+core   0: 0x12000334 (0xa7c548d7) vsra.vx v17, v28, a0
+core   0: 0x12000338 (0xfd7ae6d7) vwmaccsu.vx v13, s5, v23, v0.t
+core   0: 0x1200033c (0x741d0ad7) vmsle.vv v21, v1, v26, v0.t
+core   0: 0x12000340 (0x5afd1e37) lui     t3, 0x5afd1
+core   0: 0x12000344 (0x11cbc757) vminu.vx v14, v28, s7, v0.t
+core   0: 0x12000348 (0x26bf04a3) sb      a1, 617(t5)
+core   0: 0x1200034c (0x000f6e07) vle32.v v28, (t5), v0.t
+core   0: 0x12000350 (0x301f0aa3) sb      ra, 789(t5)
+core   0: >>>>  label169
+core   0: 0x12000354 (0x04fa7c57) vsetvli s8, s4, e16, mf2, ta, mu
+core   0: 0x12000358 (0xd9bc25d7) vwsubu.wv v11, v27, v24, v0.t
+core   0: 0x1200035c (0x2bc4cc57) vor.vx  v24, v28, s1
+core   0: 0x12000360 (0x000f5a87) vle16.v v21, (t5), v0.t
+core   0: 0x12000364 (0x07cf1623) sh      t3, 108(t5)
+core   0: 0x12000368 (0xdc2d60d7) vwsub.wx v1, v2, s10, v0.t
+core   0: 0x1200036c (0x2da10257) vxor.vv v4, v26, v2, v0.t
+core   0: 0x12000370 (0x0376f9b3) remu    s3, a3, s7
+core   0: >>>>  label177
+core   0: 0x12000374 (0xcc27f957) vsetivli s2, 15, e8, m4, ta, ma
+core   0: 0x12000378 (0x29fc1eb7) lui     t4, 0x29fc1
+core   0: >>>>  label179
+core   0: 0x1200037c (0x47c80857) vmadc.vv v16, v28, v16
+core   0: 0x12000380 (0x61080657) vmseq.vv v12, v16, v16, v0.t
+core   0: 0x12000384 (0x03d2cc33) div     s8, t0, t4
+core   0: 0x12000388 (0x868e2457) vdiv.vv v8, v8, v28
+core   0: 0x1200038c (0x021b43b3) div     t2, s6, ra
+core   0: 0x12000390 (0x768f3457) vmsle.vi v8, v8, -2
+core   0: 0x12000394 (0x40f85e93) srai    t4, a6, 15
+core   0: 0x12000398 (0x0075eb33) or      s6, a1, t2
+core   0: 0x1200039c (0x7949cc57) vmsgtu.vx v24, v20, s3, v0.t
+core   0: 0x120003a0 (0x000f0227) vse8.v  v4, (t5), v0.t
+core   0: 0x120003a4 (0xb5820a57) vnsra.wv v20, v24, v4, v0.t
+core   0: 0x120003a8 (0xdd082457) vwsub.wv v8, v16, v16, v0.t
+core   0: 0x120003ac (0xf82d3393) sltiu   t2, s10, -126
+core   0: >>>>  label192
+core   0: 0x120003b0 (0xcc98f5d7) vsetivli a1, 17, e16, m2, ta, ma
+core   0: 0x120003b4 (0x5e060657) vmv.v.v v12, v12
+core   0: 0x120003b8 (0x5e023a57) vmv.v.i v20, 4
+core   0: 0x120003bc (0x020f6407) vle32.v v8, (t5)
+core   0: 0x120003c0 (0x02bc7eb3) remu    t4, s8, a1
+core   0: 0x120003c4 (0xa5490557) vsra.vv v10, v20, v18, v0.t
+core   0: 0x120003c8 (0xe1ce2657) vwmulu.vv v12, v28, v28, v0.t
+core   0: 0x120003cc (0xa7a92f57) vmadd.vv v30, v18, v26
+core   0: 0x120003d0 (0x020f0307) vle8.v  v6, (t5)
+core   0: 0x120003d4 (0x8e58f813) andi    a6, a7, -1819
+core   0: 0x120003d8 (0x010ccfb3) xor     t6, s9, a6
+core   0: 0x120003dc (0x45423417) auipc   s0, 0x45423
+core   0: 0x120003e0 (0x7c813457) vmsgt.vi v8, v8, 2, v0.t
+core   0: 0x120003e4 (0x010f6a07) vle32ff.v v20, (t5), v0.t
+core   0: 0x120003e8 (0x0263e4b3) rem     s1, t2, t1
+core   0: 0x120003ec (0x468d3957) vmadc.vi v18, v8, -6
+core   0: 0x120003f0 (0x71cc4d57) vmsleu.vx v26, v28, s8, v0.t
+core   0: >>>>  label209
+core   0: 0x120003f4 (0x25a10357) vand.vv v6, v26, v2, v0.t
+core   0: 0x120003f8 (0x02bf01a7) vsm.v   v3, (t5)
+core   0: 0x120003fc (0x44a43e57) vmadc.vim v28, v10, 8, v0
+core   0: 0x12000400 (0x954f0523) sb      s4, -1718(t5)
+core   0: 0x12000404 (0xcae9e257) vwsubu.vx v4, v14, s3
+core   0: 0x12000408 (0x66e70157) vmsne.vv v2, v14, v14
+core   0: 0x1200040c (0x40870157) vadc.vvm v2, v8, v14, v0
+core   0: 0x12000410 (0x162a0957) vmin.vv v18, v2, v20
+core   0: 0x12000414 (0xf95a7017) auipc   zero, 0xf95a7
+core   0: >>>>  label218
+core   0: 0x12000418 (0xc0387557) vsetivli a0, 16, e8, m8, tu, mu
+core   0: 0x1200041c (0x6f8c0857) vmslt.vv v16, v24, v24
+core   0: 0x12000420 (0x84866857) vdiv.vx v16, v8, a2, v0.t
+core   0: 0x12000424 (0x010f0407) vle8ff.v v8, (t5), v0.t
+core   0: 0x12000428 (0x00a34fb3) xor     t6, t1, a0
+core   0: 0x1200042c (0x037b6e33) rem     t3, s6, s7
+core   0: 0x12000430 (0x270fb457) vand.vi v8, v16, -1
+core   0: 0x12000434 (0x02c832b3) mulhu   t0, a6, a2
+core   0: 0x12000438 (0x038729b3) mulhsu  s3, a4, s8
+core   0: 0x1200043c (0x418cc457) vadc.vxm v8, v24, s9, v0
+core   0: 0x12000440 (0x52cf1f23) sh      a2, 1342(t5)
+core   0: 0x12000444 (0x4077d433) sra     s0, a5, t2
+core   0: 0x12000448 (0x030f0c07) vle8ff.v v24, (t5)
+core   0: 0x1200044c (0x09880857) vsub.vv v16, v24, v16, v0.t
+core   0: 0x12000450 (0xa704c457) vsra.vx v8, v16, s1
+core   0: 0x12000454 (0x09149517) auipc   a0, 0x9149
+core   0: 0x12000458 (0xfd0f2f83) lw      t6, -48(t5)
+core   0: 0x1200045c (0x75083457) vmsle.vi v8, v16, -16, v0.t
+core   0: 0x12000460 (0x8b8b6457) vremu.vx v8, v24, s6
+core   0: 0x12000464 (0x030f0007) vle8ff.v v0, (t5)
+core   0: 0x12000468 (0x7d084c57) vmsgt.vx v24, v16, a6, v0.t
+core   0: >>>>  label239
+core   0: 0x1200046c (0x0132fc33) and     s8, t0, s3
+core   0: >>>>  label240
+core   0: 0x12000470 (0xc52bf2d7) vsetivli t0, 23, e32, m4, ta, mu
+core   0: >>>>  label241
+core   0: 0x12000474 (0x04a2fed7) vsetvli t4, t0, e16, m4, ta, mu
+core   0: 0x12000478 (0x000f5c27) vse16.v v24, (t5), v0.t
+core   0: 0x1200047c (0x40c40c57) vadc.vvm v24, v12, v8, v0
+core   0: 0x12000480 (0x26cfb857) vand.vi v16, v12, -1
+core   0: 0x12000484 (0x6245ba57) vmseq.vi v20, v4, 11
+core   0: 0x12000488 (0x84862c57) vdiv.vv v24, v8, v12, v0.t
+core   0: 0x1200048c (0xcecc2857) vwsub.vv v16, v12, v24
+core   0: 0x12000490 (0xcc036c57) vwsub.vx v24, v0, t1, v0.t
+core   0: 0x12000494 (0x000f5a27) vse16.v v20, (t5), v0.t
+core   0: 0x12000498 (0x020f5c27) vse16.v v24, (t5)
+core   0: 0x1200049c (0x02bf0ca7) vsm.v   v25, (t5)
+core   0: 0x120004a0 (0x02bf09a7) vsm.v   v19, (t5)
+core   0: 0x120004a4 (0x02bf0587) vlm.v   v11, (t5)
+core   0: 0x120004a8 (0x010f0d07) vle8ff.v v26, (t5), v0.t
+core   0: 0x120004ac (0x010f0c07) vle8ff.v v24, (t5), v0.t
+core   0: 0x120004b0 (0xa7ca0e57) vsra.vv v28, v28, v20
+core   0: 0x120004b4 (0x798bb257) vmsgtu.vi v4, v24, 23, v0.t
+core   0: 0x120004b8 (0xa149bc57) vsrl.vi v24, v20, 19, v0.t
+core   0: 0x120004bc (0xc3c62857) vwaddu.vv v16, v28, v12
+core   0: 0x120004c0 (0xa48c2c57) vmadd.vv v24, v24, v8, v0.t
+core   0: 0x120004c4 (0x88836a57) vremu.vx v20, v8, t1, v0.t
+core   0: 0x120004c8 (0x000f0727) vse8.v  v14, (t5), v0.t
+core   0: 0x120004cc (0x02bf0b27) vsm.v   v22, (t5)
+core   0: 0x120004d0 (0x000f6427) vse32.v v8, (t5), v0.t
+core   0: 0x120004d4 (0x02bf0c27) vsm.v   v24, (t5)
+core   0: 0x120004d8 (0x020f0427) vse8.v  v8, (t5)
+core   0: 0x120004dc (0x030f6c07) vle32ff.v v24, (t5)
+core   0: 0x120004e0 (0x010f5607) vle16ff.v v12, (t5), v0.t
+core   0: >>>>  footer
+core   0: 0x120004e4 (0x0180006f) j       pc + 0x18
+core   0: >>>>  end
+core   0: 0x120004fc (0x00000033) add     zero, zero, zero
+core   0: 0x12000500 (0x00100293) li      t0, 1
+core   0: 0x12000504 (0x0e004317) auipc   t1, 0xe004
+core   0: 0x12000508 (0xafc30313) addi    t1, t1, -1284
+core   0: 0x1200050c (0x00532023) sw      t0, 0(t1)
+core   0: >>>>  loop_stop
+core   0: 0x12000510 (0x0000006f) j       pc + 0x0

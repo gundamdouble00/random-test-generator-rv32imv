@@ -1,0 +1,153 @@
+Program 6
+Resuls: Passed
+
+Instruction types in program:
+	Type I_OP_S: 13 (Want: 12)
+		- sh: 5
+		- sw: 2
+		- sb: 6
+
+	Type V_OP_FAULT_ONLY_FIRST_LOADS: 32 (Want: 32)
+		- vle8ff.v: 15
+		- vle16ff.v: 8
+		- vle32ff.v: 9
+
+	Type V_OPCFG: 33 (Want: 32)
+		- vsetvl: 14
+		- vsetvli: 10
+		- vsetivli: 9
+
+	Type V_OPIVX: 33 (Want: 32)
+		- vsub.vx: 1
+		- vmsgt.vx: 1
+		- vmsbc.vxm: 4
+		- vrsub.vx: 4
+		- vmsltu.vx: 2
+		- vmsle.vx: 1
+		- vmin.vx: 2
+		- vmadc.vxm: 1
+		- vor.vx: 2
+		- vmsne.vx: 2
+		- vmsgtu.vx: 1
+		- vadd.vx: 2
+		- vmseq.vx: 1
+		- vxor.vx: 2
+		- vsra.vx: 1
+		- vmaxu.vx: 1
+		- vand.vx: 2
+		- vmslt.vx: 1
+		- vmerge.vxm: 1
+		- vmax.vx: 1
+
+	Type V_OP_STRIDED: 55 (Want: 54)
+		- vsse8.v: 11
+		- vsse16.v: 7
+		- vlse16.v: 10
+		- vsse32.v: 9
+		- vlse32.v: 6
+		- vlse8.v: 12
+
+	Type V_OPIVI: 16 (Want: 16)
+		- vxor.vi: 1
+		- vmsgtu.vi: 1
+		- vsrl.vi: 2
+		- vadd.vi: 1
+		- vsra.vi: 3
+		- vor.vi: 2
+		- vmsle.vi: 1
+		- vmv.v.i: 1
+		- vsll.vi: 2
+		- vmseq.vi: 1
+		- vmerge.vim: 1
+
+	Type V_OPIVV: 34 (Want: 32)
+		- vand.vv: 2
+		- vnsrl.wv: 2
+		- vsbc.vvm: 2
+		- vxor.vv: 1
+		- vsra.vv: 1
+		- vadc.vvm: 2
+		- vmaxu.vv: 3
+		- vmsne.vv: 1
+		- vsrl.vv: 1
+		- vmslt.vv: 1
+		- vsub.vv: 1
+		- vadd.vv: 1
+		- vmsbc.vvm: 2
+		- vmsleu.vv: 3
+		- vmerge.vvm: 1
+		- vmadc.vvm: 1
+		- vmsltu.vv: 1
+		- vsll.vv: 1
+		- vmseq.vv: 1
+		- vmin.vv: 1
+		- vmv.v.v: 2
+		- vor.vv: 1
+		- vminu.vv: 1
+		- vmsle.vv: 1
+
+	Type V_OP_UNIT_STRIDE: 33 (Want: 32)
+		- vlm.v: 4
+		- vse32.v: 3
+		- vle32.v: 5
+		- vsm.v: 3
+		- vse8.v: 7
+		- vle16.v: 7
+		- vle8.v: 3
+		- vse16.v: 1
+
+	Type I_OP_J: 4 (Want: 3)
+		- jal: 4
+
+	Type V_OPMVX: 26 (Want: 32)
+		- vwsub.wx: 1
+		- vmul.vx: 2
+		- vdivu.vx: 2
+		- vmulhsu.vx: 2
+		- vnmsac.vx: 1
+		- vmadd.vx: 1
+		- vdiv.vx: 6
+		- vwmaccus.vx: 2
+		- vwmaccu.vx: 1
+		- vwsubu.vx: 1
+		- vwmaccsu.vx: 2
+		- vwmulu.vx: 1
+		- vrem.vx: 1
+		- vmulh.vx: 1
+		- vmulhu.vx: 1
+		- vwmulsu.vx: 1
+
+	Type I_OP_R: 15 (Want: 12)
+		- sra: 2
+		- sltu: 3
+		- slt: 3
+		- sub: 1
+		- and: 1
+		- add: 1
+		- sll: 2
+		- xor: 2
+
+	Type V_OPMVV: 13 (Want: 16)
+		- vwmacc.vv: 1
+		- vmulh.vv: 1
+		- vmulhsu.vv: 1
+		- vdivu.vv: 3
+		- vzext.vf2: 1
+		- vwmaccu.vv: 1
+		- vwsubu.vv: 1
+		- vnmsac.vv: 1
+		- vzext.vf4: 1
+		- vdiv.vv: 1
+		- vnmsub.vv: 1
+
+	Type I_OP_I: 13 (Want: 12)
+		- andi: 1
+		- jalr: 1
+		- lbu: 1
+		- srli: 2
+		- ori: 2
+		- lh: 3
+		- slti: 1
+		- slli: 1
+		- lw: 1
+

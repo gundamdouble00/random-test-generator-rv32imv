@@ -1,0 +1,140 @@
+Program 7
+Resuls: Passed
+
+Instruction types in program:
+	Type V_OPIVV: 34 (Want: 32)
+		- vmsbc.vvm: 3
+		- vsbc.vvm: 4
+		- vand.vv: 3
+		- vmsleu.vv: 4
+		- vmin.vv: 2
+		- vadd.vv: 3
+		- vsra.vv: 1
+		- vmslt.vv: 1
+		- vadc.vvm: 2
+		- vmv.v.v: 1
+		- vsub.vv: 1
+		- vor.vv: 2
+		- vmadc.vvm: 1
+		- vmerge.vvm: 1
+		- vxor.vv: 2
+		- vmsne.vv: 1
+		- vmsbc.vv: 1
+		- vmseq.vv: 1
+
+	Type V_OP_FAULT_ONLY_FIRST_LOADS: 32 (Want: 32)
+		- vle8ff.v: 14
+		- vle32ff.v: 7
+		- vle16ff.v: 11
+
+	Type V_OPCFG: 34 (Want: 32)
+		- vsetvl: 12
+		- vsetvli: 13
+		- vsetivli: 9
+
+	Type V_OPMVX: 24 (Want: 32)
+		- vremu.vx: 2
+		- vmulh.vx: 1
+		- vmul.vx: 1
+		- vmulhu.vx: 3
+		- vmulhsu.vx: 2
+		- vwmul.vx: 1
+		- vwadd.wx: 2
+		- vmadd.vx: 1
+		- vwadd.vx: 2
+		- vdiv.vx: 1
+		- vdivu.vx: 4
+		- vnmsac.vx: 1
+		- vwsubu.vx: 2
+		- vmacc.vx: 1
+
+	Type V_OP_STRIDED: 52 (Want: 54)
+		- vlse8.v: 12
+		- vlse16.v: 5
+		- vsse32.v: 9
+		- vlse32.v: 12
+		- vsse8.v: 9
+		- vsse16.v: 5
+
+	Type V_OPIVI: 20 (Want: 16)
+		- vand.vi: 3
+		- vmerge.vim: 2
+		- vsra.vi: 2
+		- vor.vi: 2
+		- vmsleu.vi: 2
+		- vmseq.vi: 1
+		- vmadc.vim: 1
+		- vadd.vi: 2
+		- vsll.vi: 1
+		- vmsgt.vi: 1
+		- vmsle.vi: 1
+		- vrsub.vi: 1
+		- vadc.vim: 1
+
+	Type V_OPIVX: 32 (Want: 32)
+		- vsll.vx: 4
+		- vrsub.vx: 3
+		- vmerge.vxm: 1
+		- vsrl.vx: 2
+		- vnsrl.wx: 1
+		- vmseq.vx: 2
+		- vand.vx: 2
+		- vmaxu.vx: 2
+		- vsub.vx: 2
+		- vmsle.vx: 1
+		- vmsbc.vxm: 1
+		- vor.vx: 3
+		- vmsltu.vx: 2
+		- vmsgtu.vx: 2
+		- vmadc.vxm: 2
+		- vmsne.vx: 1
+		- vmsbc.vx: 1
+
+	Type I_OP_I: 13 (Want: 12)
+		- jalr: 1
+		- slti: 2
+		- lb: 2
+		- srai: 2
+		- lh: 1
+		- andi: 1
+		- xori: 1
+		- srli: 1
+		- lbu: 2
+
+	Type I_OP_R: 16 (Want: 12)
+		- sub: 4
+		- sltu: 1
+		- sra: 2
+		- or: 1
+		- sll: 2
+		- add: 2
+		- and: 3
+		- srl: 1
+
+	Type V_OPMVV: 10 (Want: 16)
+		- vdiv.vv: 2
+		- vsext.vf2: 2
+		- vzext.vf2: 1
+		- vmacc.vv: 2
+		- vmulhu.vv: 1
+		- vdivu.vv: 1
+		- vmulh.vv: 1
+
+	Type I_OP_S: 16 (Want: 12)
+		- sb: 4
+		- sw: 4
+		- sh: 8
+
+	Type V_OP_UNIT_STRIDE: 33 (Want: 32)
+		- vle32.v: 7
+		- vse32.v: 3
+		- vlm.v: 5
+		- vsm.v: 4
+		- vle8.v: 5
+		- vle16.v: 4
+		- vse16.v: 3
+		- vse8.v: 2
+
+	Type I_OP_J: 4 (Want: 3)
+		- jal: 4
+

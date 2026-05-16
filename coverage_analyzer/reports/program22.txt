@@ -1,0 +1,146 @@
+Program 22
+Resuls: Passed
+
+Instruction types in program:
+	Type I_OP_S: 16 (Want: 12)
+		- sb: 3
+		- sw: 8
+		- sh: 5
+
+	Type V_OP_FAULT_ONLY_FIRST_LOADS: 31 (Want: 32)
+		- vle8ff.v: 13
+		- vle32ff.v: 7
+		- vle16ff.v: 11
+
+	Type V_OP_UNIT_STRIDE: 33 (Want: 32)
+		- vlm.v: 7
+		- vle16.v: 3
+		- vle32.v: 6
+		- vle8.v: 8
+		- vse32.v: 4
+		- vsm.v: 2
+		- vse16.v: 3
+
+	Type V_OPIVX: 36 (Want: 32)
+		- vmax.vx: 2
+		- vmadc.vxm: 3
+		- vmsltu.vx: 2
+		- vadd.vx: 3
+		- vsll.vx: 2
+		- vsrl.vx: 1
+		- vmslt.vx: 1
+		- vnsra.wx: 1
+		- vmsne.vx: 4
+		- vmsgt.vx: 2
+		- vmaxu.vx: 1
+		- vmerge.vxm: 2
+		- vsra.vx: 1
+		- vsbc.vxm: 1
+		- vrsub.vx: 4
+		- vmadc.vx: 1
+		- vand.vx: 1
+		- vmsgtu.vx: 1
+		- vmsbc.vx: 1
+		- vmsleu.vx: 1
+		- vsub.vx: 1
+
+	Type I_OP_I: 12 (Want: 12)
+		- addi: 1
+		- xori: 2
+		- sltiu: 1
+		- srli: 1
+		- srai: 1
+		- lhu: 1
+		- lb: 2
+		- jalr: 1
+		- lbu: 2
+
+	Type V_OPCFG: 34 (Want: 32)
+		- vsetvli: 12
+		- vsetvl: 14
+		- vsetivli: 8
+
+	Type V_OPMVX: 28 (Want: 32)
+		- vmadd.vx: 4
+		- vwmulu.vx: 2
+		- vnmsub.vx: 2
+		- vwaddu.vx: 1
+		- vdiv.vx: 3
+		- vwmulsu.vx: 1
+		- vwsubu.vx: 1
+		- vwmaccu.vx: 1
+		- vmulhsu.vx: 3
+		- vmacc.vx: 1
+		- vmul.vx: 1
+		- vwadd.wx: 1
+		- vnmsac.vx: 2
+		- vmulhu.vx: 3
+		- vdivu.vx: 1
+		- vremu.vx: 1
+
+	Type V_OPMVV: 12 (Want: 16)
+		- vwmul.vv: 1
+		- vwsub.wv: 1
+		- vsext.vf2: 1
+		- vmacc.vv: 1
+		- vwmaccu.vv: 1
+		- vzext.vf4: 1
+		- vmul.vv: 3
+		- vnmsub.vv: 1
+		- vdiv.vv: 1
+		- vsext.vf4: 1
+
+	Type V_OP_STRIDED: 51 (Want: 54)
+		- vlse16.v: 12
+		- vlse8.v: 8
+		- vsse8.v: 9
+		- vlse32.v: 8
+		- vsse32.v: 7
+		- vsse16.v: 7
+
+	Type V_OPIVV: 30 (Want: 32)
+		- vmax.vv: 2
+		- vsll.vv: 1
+		- vmsbc.vv: 2
+		- vmsle.vv: 1
+		- vand.vv: 1
+		- vmadc.vvm: 3
+		- vmseq.vv: 1
+		- vsub.vv: 1
+		- vmsne.vv: 3
+		- vmaxu.vv: 4
+		- vxor.vv: 1
+		- vmadc.vv: 1
+		- vsrl.vv: 2
+		- vmslt.vv: 3
+		- vmv.v.v: 1
+		- vsbc.vvm: 1
+		- vmin.vv: 1
+		- vmsbc.vvm: 1
+
+	Type I_OP_R: 17 (Want: 12)
+		- sub: 2
+		- or: 2
+		- srl: 5
+		- slt: 3
+		- xor: 1
+		- sra: 2
+		- add: 1
+		- sll: 1
+
+	Type V_OPIVI: 17 (Want: 16)
+		- vor.vi: 1
+		- vmsgt.vi: 1
+		- vadd.vi: 2
+		- vand.vi: 3
+		- vsrl.vi: 1
+		- vsll.vi: 2
+		- vmseq.vi: 2
+		- vmerge.vim: 1
+		- vmv.v.i: 2
+		- vmadc.vim: 1
+		- vmadc.vi: 1
+
+	Type I_OP_J: 3 (Want: 3)
+		- jal: 3
+

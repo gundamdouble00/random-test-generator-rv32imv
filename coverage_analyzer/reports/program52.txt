@@ -1,0 +1,150 @@
+Program 52
+Resuls: Passed
+
+Instruction types in program:
+	Type V_OPIVV: 34 (Want: 32)
+		- vmsne.vv: 1
+		- vmseq.vv: 1
+		- vmin.vv: 2
+		- vmerge.vvm: 1
+		- vsbc.vvm: 1
+		- vor.vv: 4
+		- vmadc.vvm: 1
+		- vminu.vv: 2
+		- vand.vv: 2
+		- vmslt.vv: 2
+		- vadd.vv: 2
+		- vmsltu.vv: 1
+		- vmsbc.vv: 3
+		- vnsrl.wv: 1
+		- vmaxu.vv: 3
+		- vsub.vv: 1
+		- vsrl.vv: 1
+		- vsll.vv: 2
+		- vsra.vv: 1
+		- vmsleu.vv: 1
+		- vmadc.vv: 1
+
+	Type V_OP_STRIDED: 55 (Want: 54)
+		- vsse8.v: 12
+		- vlse16.v: 10
+		- vlse8.v: 10
+		- vlse32.v: 8
+		- vsse32.v: 9
+		- vsse16.v: 6
+
+	Type V_OP_UNIT_STRIDE: 36 (Want: 32)
+		- vse16.v: 11
+		- vle32.v: 3
+		- vsm.v: 4
+		- vse8.v: 5
+		- vlm.v: 4
+		- vle8.v: 3
+		- vse32.v: 2
+		- vle16.v: 4
+
+	Type V_OPIVX: 30 (Want: 32)
+		- vand.vx: 1
+		- vmsne.vx: 1
+		- vmsbc.vxm: 3
+		- vmax.vx: 3
+		- vmsle.vx: 2
+		- vmsbc.vx: 2
+		- vmerge.vxm: 1
+		- vor.vx: 1
+		- vmaxu.vx: 3
+		- vmadc.vx: 1
+		- vrsub.vx: 1
+		- vmseq.vx: 1
+		- vmslt.vx: 1
+		- vmsleu.vx: 1
+		- vxor.vx: 1
+		- vmv.v.x: 1
+		- vmsltu.vx: 1
+		- vmsgtu.vx: 2
+		- vmsgt.vx: 1
+		- vsra.vx: 1
+		- vadd.vx: 1
+
+	Type V_OPMVV: 11 (Want: 16)
+		- vsext.vf4: 2
+		- vzext.vf2: 2
+		- vnmsac.vv: 1
+		- vmadd.vv: 1
+		- vdivu.vv: 1
+		- vmulhsu.vv: 2
+		- vremu.vv: 1
+		- vwmacc.vv: 1
+
+	Type V_OP_FAULT_ONLY_FIRST_LOADS: 33 (Want: 32)
+		- vle32ff.v: 11
+		- vle16ff.v: 12
+		- vle8ff.v: 10
+
+	Type I_OP_I: 15 (Want: 12)
+		- srai: 1
+		- andi: 3
+		- lbu: 1
+		- lw: 3
+		- xori: 1
+		- lb: 1
+		- addi: 2
+		- sltiu: 2
+		- srli: 1
+
+	Type I_OP_S: 15 (Want: 12)
+		- sh: 5
+		- sw: 7
+		- sb: 3
+
+	Type V_OPCFG: 34 (Want: 32)
+		- vsetvl: 10
+		- vsetvli: 17
+		- vsetivli: 7
+
+	Type I_OP_R: 14 (Want: 12)
+		- add: 2
+		- sll: 1
+		- or: 2
+		- slt: 1
+		- sra: 2
+		- and: 3
+		- srl: 1
+		- sltu: 2
+
+	Type V_OPIVI: 15 (Want: 16)
+		- vsrl.vi: 2
+		- vmseq.vi: 1
+		- vmadc.vim: 2
+		- vmsne.vi: 1
+		- vrsub.vi: 1
+		- vmadc.vi: 1
+		- vnsra.wi: 1
+		- vsll.vi: 1
+		- vmsleu.vi: 1
+		- vmsgt.vi: 1
+		- vor.vi: 1
+		- vmerge.vim: 1
+		- vmsgtu.vi: 1
+
+	Type V_OPMVX: 23 (Want: 32)
+		- vdiv.vx: 1
+		- vmulhsu.vx: 2
+		- vmadd.vx: 1
+		- vwmaccus.vx: 2
+		- vwsub.wx: 1
+		- vnmsub.vx: 2
+		- vdivu.vx: 3
+		- vmul.vx: 1
+		- vmulh.vx: 1
+		- vmulhu.vx: 1
+		- vwadd.wx: 1
+		- vwmaccu.vx: 1
+		- vwmulu.vx: 2
+		- vnmsac.vx: 2
+		- vmacc.vx: 1
+		- vrem.vx: 1
+
+	Type I_OP_J: 5 (Want: 3)
+		- jal: 5
+
