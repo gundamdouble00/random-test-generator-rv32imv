@@ -15,7 +15,7 @@ from rtg.settings import (
 )
 
 
-def is_integer_num(s: str):
+def is_integer(s: str) -> int | bool:
     try:
         return int(s)
     except Exception:
@@ -23,24 +23,34 @@ def is_integer_num(s: str):
 
 
 def data_hazards(dictionary: dict[str, int], value: str):
-    if value in dictionary and dictionary[value] != 0:
+    """
+    # Read after Write (RAW)\n
+    add r1, --, --;\n
+    sub --, r1, --;\n
+
+    # Write after Read (WAR)\n
+    add --, r1, --; \n
+    sub r1, --, --; \n
+
+    # Write after Write (WAW)\n
+    add r1, --, --;\n
+    sub r1, --, --;\n
+    """
+    if (value in dictionary) and (dictionary[value] != 0):
         return DATA_HAZARD_SCORE
     return 0
 
 
-def reg_dictionary(dictionary: dict[str, int], value: str):
-    if is_integer_num(value) or value == "":
+def update_reg_dict(dictionary: dict[str, int], register: str, value: int):
+    if len(register) != 3:
         return
-    dictionary[value] += 1
-
-
-def update_dictionary(dictionary: dict[str, int], value: str):
-    if value in dictionary:
-        dictionary[value] -= 1
+    if (register[0] not in {"v", "x"}) or (not is_integer(register[1:])):
+        return
+    dictionary[register] += value
 
 
 def same_registers(regs: set[str], cur_reg: str):
-    if not is_integer_num(cur_reg) and cur_reg in regs and cur_reg != "":
+    if (not is_integer(cur_reg)) and (cur_reg in regs) and (cur_reg != ""):
         return SAME_OPERANDS_SCORE
     return 0
 
@@ -52,10 +62,10 @@ def calculate_fitness(individual: Program):
 
     fitness_score: float = 0.0
     for type, want in PROGRAM_INS.items():
-        # Subtract score if the program doesn't have enough instructions in a type
         if want == 0:
             continue
 
+        # Subtract score if the program doesn't have enough instructions in a type
         actual = individual.count_type[type]
         if want > actual:
             fitness_score -= PENALTY_PER_MISSING
@@ -67,15 +77,14 @@ def calculate_fitness(individual: Program):
         min_num: int = PROGRAM_LEN
         cur_type_ins = individual.count_ins[type]
         for nums in cur_type_ins.values():
-            min_num = min(min_num, nums)
+            if nums != 0:
+                min_num = min(min_num, nums)
         variety: float = (min_num * len(cur_type_ins)) / actual
-
         fitness_score += variety
 
     # Data Hazards - Using "Sliding Window" for calculating hazard score
-    des_reg: dict[str, int] = defaultdict(int)
-    src_reg: dict[str, int] = defaultdict(int)
-
+    des_reg: dict[str, int] = defaultdict(int)  # Destination Registers Set
+    src_reg: dict[str, int] = defaultdict(int)  # Source Registers Set
     for i in range(0, PROGRAM_LEN):
         cur_ins = individual.body[i]
         src3: str = ""
@@ -97,36 +106,35 @@ def calculate_fitness(individual: Program):
         fitness_score += same_registers({cur_ins.src1, cur_ins.src2}, cur_ins.des)
         fitness_score += same_registers({cur_ins.src1, cur_ins.src2}, src3)
 
-        reg_dictionary(des_reg, cur_ins.des)
-        reg_dictionary(src_reg, cur_ins.src1)
-        reg_dictionary(src_reg, cur_ins.src2)
+        # Update the number of registers in des_reg and src_reg
+        update_reg_dict(des_reg, cur_ins.des, 1)
+        update_reg_dict(src_reg, cur_ins.src1, 1)
+        update_reg_dict(src_reg, cur_ins.src2, 1)
         if isinstance(cur_ins, (BaseIntegerIns, LoadsStores)):
-            reg_dictionary(src_reg, cur_ins.src3)
+            update_reg_dict(src_reg, cur_ins.src3, 1)
 
-        if isinstance(cur_ins, BaseIntegerIns):
-            num = is_integer_num(cur_ins.imm)
-        else:
-            num = is_integer_num(cur_ins.src1)
+        # Negative immediate score
+        num = (
+            is_integer(cur_ins.imm)
+            if isinstance(cur_ins, BaseIntegerIns)
+            else is_integer(cur_ins.src1)
+        )
         if num and num < 0:
             fitness_score += NEGATIVE_IMM_SCORE
 
+        # Decrease the number of instruction's registers in des_reg and src_reg
         if i > 6:
             cur_ins = individual.body[i - 7]
-            update_dictionary(des_reg, cur_ins.des)
-            update_dictionary(src_reg, cur_ins.src1)
-            update_dictionary(src_reg, cur_ins.src2)
+            update_reg_dict(des_reg, cur_ins.des, -1)
+            update_reg_dict(src_reg, cur_ins.src1, -1)
+            update_reg_dict(src_reg, cur_ins.src2, -1)
             if isinstance(cur_ins, (BaseIntegerIns, LoadsStores)):
-                update_dictionary(src_reg, cur_ins.src3)
+                update_reg_dict(src_reg, cur_ins.src3, -1)
 
     individual.fitness = fitness_score
 
 
-def cal_non_multithreading(population: list[Program]):
-    for individual in population:
-        calculate_fitness(individual)
-
-
-def fitness_multithreading(population: list[Program]):
+def fitness_evaluation(population: list[Program]):
     max_workers = os.cpu_count()
     if max_workers is not None:
         max_workers = max(1, max_workers // 2)

@@ -119,7 +119,6 @@ class ConfigurationSetting(BaseVectorIns):
     @override
     def generate(self) -> str:
         prefix: str = f"{self.name} {self.des}, {self.src1}, "
-        # self.name == "vsetvl"
         if self.name == "vsetvl":
             return prefix + self.src2
 

@@ -4,7 +4,6 @@ import os
 import random
 from copy import deepcopy
 
-from rtg.ga.calculate_fitness import calculate_fitness
 from rtg.program.program import Program
 from rtg.rv_categories.riscv_types import RISCVTypes
 from rtg.rv_instructions.base_instruction import BaseIntegerIns, BaseVectorIns
@@ -22,6 +21,7 @@ def get_cfg_ins(individual: Program) -> list[list[BaseIntegerIns | BaseVectorIns
             temp_list.append(cur_ins)
             continue
 
+        # cur_ins.type == RISCVTypes.V_OPCFG
         if len(temp_list) != 0:
             if temp_list[0].type != RISCVTypes.V_OPCFG:
                 cfg_obj = ConfigurationSetting("vsetvli", 0, 8.0, 32)
@@ -36,25 +36,46 @@ def get_cfg_ins(individual: Program) -> list[list[BaseIntegerIns | BaseVectorIns
     return result
 
 
-def two_point_crossover(
-    gene1: list[list[BaseIntegerIns | BaseVectorIns]],
-    gene2: list[list[BaseIntegerIns | BaseVectorIns]],
-):
-    pos_replace: int = random.randint(0, len(gene1) - 1)
-    start: int = random.randint(0, len(gene2) - 1)
-    end: int = random.randint(0, len(gene2) - 1)
-    if start > end:
-        start, end = end, start
+def random_sampling_crossover(parent1: Program, parent2: Program):
+    gene1, gene2 = get_cfg_ins(parent1), get_cfg_ins(parent2)
+    pool: list[list[BaseIntegerIns | BaseVectorIns]] = []
+    pool = gene1 + gene2
+    random.shuffle(pool)
 
-    new_gene: list[BaseIntegerIns | BaseVectorIns] = []
-    for i in range(pos_replace + 1):
-        new_gene.extend(gene1[i])
-    for i in range(start, end + 1):
-        new_gene.extend(gene2[i])
-    for i in range(pos_replace + 1, len(gene1)):
-        new_gene.extend(gene1[i])
+    offspring1 = Program()
+    for gene in pool:
+        if len(offspring1.body) > PROGRAM_LEN:
+            break
+        offspring1.body.extend(gene)
+    offspring1.body = offspring1.body[:PROGRAM_LEN]
 
-    return new_gene[:PROGRAM_LEN]
+    offspring2 = Program()
+    total_length, flag = 0, -1
+    for i in range(len(pool) - 1, -1, -1):
+        total_length += len(pool[i])
+        if total_length > PROGRAM_LEN:
+            flag = i
+            break
+    for i in range(flag, len(pool)):
+        offspring2.body.extend(pool[i])
+    offspring2.body = offspring2.body[:PROGRAM_LEN]
+
+    return [offspring1, offspring2]
+
+
+def uniform_crossover(parent1: Program, parent2: Program):
+    offspring1 = Program()
+    offspring2 = Program()
+
+    for i in range(PROGRAM_LEN):
+        if random.random() < 0.5:
+            offspring1.body.append(parent1.body[i])
+            offspring2.body.append(parent2.body[i])
+        else:
+            offspring1.body.append(parent2.body[i])
+            offspring2.body.append(parent1.body[i])
+
+    return [offspring1, offspring2]
 
 
 def execute_crossover(parent1: Program, parent2: Program, probability: float):
@@ -64,33 +85,10 @@ def execute_crossover(parent1: Program, parent2: Program, probability: float):
         return [offspring1, offspring2]
 
     # probability <= CROSSOVER_RATE
-    offspring1 = Program()
-    offspring2 = Program()
-
-    if not HAS_VECTOR:
-        for i in range(PROGRAM_LEN):
-            if random.random() < 0.5:
-                offspring1.body.append(parent1.body[i])
-                offspring2.body.append(parent2.body[i])
-            else:
-                offspring1.body.append(parent2.body[i])
-                offspring2.body.append(parent1.body[i])
-
-        calculate_fitness(offspring1)
-        calculate_fitness(offspring2)
-
-        return [offspring1, offspring2]
-
     # Have "V" Extension Instruction
-    gene1 = get_cfg_ins(parent1)
-    gene2 = get_cfg_ins(parent2)
-
-    offspring1.body = two_point_crossover(gene1, gene2)
-    offspring2.body = two_point_crossover(gene2, gene1)
-    calculate_fitness(offspring1)
-    calculate_fitness(offspring2)
-
-    return [offspring1, offspring2]
+    if HAS_VECTOR:
+        return random_sampling_crossover(parent1, parent2)
+    return uniform_crossover(parent1, parent2)
 
 
 def crossover(parents: list[Program]) -> list[Program]:

@@ -1,4 +1,4 @@
-TEST_CASES = 26 # The number of test cases
+TEST_CASES = 12 # The number of test cases
 PROGRAM_LEN = 260 # The length of the body program
 
 # TEXT is the text memory, DATA is the data memory
@@ -320,7 +320,7 @@ I_OP_R = 6
 I_OP_I = 6
 I_OP_S = 6
 I_OP_U = 6
-I_OP_B = 1
+I_OP_B = 6
 I_OP_J = 0
 
 # M Extension for Integer Multiplication and Division
@@ -328,10 +328,10 @@ M_OP_M = 10
 
 # V Standard Extension for VectorOperations
 # Vector Integer Arithmetic Instructions
-V_OPIVV = 10
-V_OPIVX = 10
-V_OPIVI = 7
-V_OPMVV = 7
+V_OPIVV = 5
+V_OPIVX = 5
+V_OPIVI = 6
+V_OPMVV = 6
 V_OPMVX = 6
 # Configuration-Setting Instructions
 V_OPCFG = 10
@@ -339,8 +339,8 @@ V_OPCFG = 10
 # Unit-stride
 V_OP_UNIT_STRIDE = 10
 # Unit-stride Fault-Only-First Loads
-V_OP_FAULT_ONLY_FIRST_LOADS = 5
+V_OP_FAULT_ONLY_FIRST_LOADS = 6
 # Strided
-V_OP_STRIDED = 0
+V_OP_STRIDED = 6
 # Indexed
 V_OP_INDEXED = 0

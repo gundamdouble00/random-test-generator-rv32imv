@@ -17,6 +17,4 @@ def initialization_multithreading():
 
 
 def initialization() -> list[Program]:
-    result = initialization_multithreading()
-
-    return result
+    return initialization_multithreading()

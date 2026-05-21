@@ -16,8 +16,8 @@ class LogFile:
 
     def __init__(self, index: int) -> None:
         self.index: int = index
-        self.body_addr: str = ""
-        self.footer_addr: str = ""
+        self.body_addr: int = 0x0
+        self.footer_addr: int = 0x0
         self.executed_ins: list[list[str]] = []
         self.count_type: dict[str, int] = defaultdict(int)
         self.count_ins: dict[str, dict[str, int]] = defaultdict(

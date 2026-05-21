@@ -170,9 +170,6 @@ def generate_data_segment():
         data1.append(hex(random.randint(start, end)))
         data2.append(hex(random.randint(start, end)))
 
-    print(f"Length of data1: {len(data1)}")
-    print(f"Length of data2: {len(data2)}")
-
     first_region: str = "\tdata1: .word " + ", ".join(data1)
     second_region: str = "\tdata2: .word " + ", ".join(data2)
     mem_region.append(first_region)
