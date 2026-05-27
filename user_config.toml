@@ -1,5 +1,5 @@
 TEST_CASES = 12 # The number of test cases
-PROGRAM_LEN = 260 # The length of the body program
+PROGRAM_LEN = 12 # The length of the body program
 
 # TEXT is the text memory, DATA is the data memory
 # ORIGIN is the base address of the current memory region. ORIGIN must be a "hex" string
@@ -316,31 +316,31 @@ M_OP_M = [
 # The sum of rates must equal to 100
 [RV32_RATES]
 # RV32I Base Integer Instruction Set
-I_OP_R = 6
-I_OP_I = 6
-I_OP_S = 6
-I_OP_U = 6
-I_OP_B = 6
-I_OP_J = 0
+I_OP_R = 5
+I_OP_I = 5
+I_OP_S = 5
+I_OP_U = 5
+I_OP_B = 0
+I_OP_J = 5
 
 # M Extension for Integer Multiplication and Division
 M_OP_M = 10
 
 # V Standard Extension for VectorOperations
 # Vector Integer Arithmetic Instructions
-V_OPIVV = 5
-V_OPIVX = 5
-V_OPIVI = 6
-V_OPMVV = 6
-V_OPMVX = 6
+V_OPIVV = 10
+V_OPIVX = 10
+V_OPIVI = 10
+V_OPMVV = 0
+V_OPMVX = 0
 # Configuration-Setting Instructions
 V_OPCFG = 10
 # Vector Loads and Stores
 # Unit-stride
 V_OP_UNIT_STRIDE = 10
 # Unit-stride Fault-Only-First Loads
-V_OP_FAULT_ONLY_FIRST_LOADS = 6
+V_OP_FAULT_ONLY_FIRST_LOADS = 5
 # Strided
-V_OP_STRIDED = 6
+V_OP_STRIDED = 10
 # Indexed
 V_OP_INDEXED = 0

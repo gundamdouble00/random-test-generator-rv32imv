@@ -5,8 +5,7 @@ from rtg.ga.mutation import mutation
 from rtg.ga.selection import rank_selection
 from rtg.ga.utils import add_label_loop, save_to_file, set_up_link_origin
 from rtg.program.program import Program
-from rtg.rv_categories.riscv_types import RISCVTypes
-from rtg.settings import NUM_GENERATIONS, PROGRAM_INS, TEST_CASES
+from rtg.settings import NUM_GENERATIONS, TEST_CASES
 
 
 def genetic_algorithm():
@@ -43,21 +42,8 @@ def genetic_algorithm():
         new_generation.extend(offsprings)
         population = new_generation[:TEST_CASES]
 
-    failed_programs: int = 0
-    for i in range(TEST_CASES):
-        missing_ins: int = 0
-        missing_flag: bool = False
-        for key, val in population[i].count_type.items():
-            if val < PROGRAM_INS[RISCVTypes(key)]:
-                missing: int = PROGRAM_INS[RISCVTypes(key)] - val
-                missing_ins += missing
-                missing_flag = True
-                # print(f"Program {i} misses {missing} {key} Instruction")
-        if missing_flag:
-            failed_programs += 1
-            # print(f"Program {i} misses {missing_ins} instructions")
-
-    print(f"{failed_programs} failed")
+    fitness_evaluation(population)
+    population = sorted(population, key=lambda x: x.fitness, reverse=True)
 
     for i in range(TEST_CASES):
         add_label_loop(population[i])

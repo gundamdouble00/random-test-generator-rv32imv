@@ -2,144 +2,45 @@ Program 4
 Resuls: Passed
 
 Instruction types in program:
-	Type V_OPCFG: 33 (Want: 32)
-		- vsetvl: 12
-		- vsetivli: 8
-		- vsetvli: 13
+	Type V_OPCFG: 2 (Want: 1)
+		- vsetvli: 2
 
-	Type V_OP_STRIDED: 47 (Want: 54)
-		- vlse8.v: 13
-		- vlse32.v: 5
-		- vsse8.v: 3
-		- vsse16.v: 8
-		- vsse32.v: 12
-		- vlse16.v: 6
+	Type V_OPIVI: 2 (Want: 1)
+		- vsll.vi: 1
+		- vnsra.wi: 1
 
-	Type V_OPMVX: 25 (Want: 32)
-		- vmulhsu.vx: 1
-		- vwmulsu.vx: 2
-		- vrem.vx: 3
-		- vwmacc.vx: 1
-		- vnmsub.vx: 1
-		- vdiv.vx: 1
-		- vmulh.vx: 1
-		- vmacc.vx: 2
-		- vmadd.vx: 1
-		- vnmsac.vx: 1
-		- vdivu.vx: 1
-		- vremu.vx: 3
-		- vmul.vx: 3
-		- vmulhu.vx: 2
-		- vwmul.vx: 1
-		- vwmaccu.vx: 1
+	Type V_OP_STRIDED: 2 (Want: 1)
+		- vsse16.v: 2
 
-	Type V_OPIVX: 37 (Want: 32)
-		- vmax.vx: 4
-		- vmsbc.vxm: 2
-		- vmaxu.vx: 3
-		- vor.vx: 1
-		- vand.vx: 2
-		- vsll.vx: 1
-		- vmsbc.vx: 3
-		- vadd.vx: 2
-		- vadc.vxm: 2
-		- vmadc.vx: 3
-		- vsub.vx: 1
-		- vmv.v.x: 2
-		- vminu.vx: 1
-		- vxor.vx: 1
-		- vmsne.vx: 2
-		- vsra.vx: 1
-		- vmslt.vx: 2
-		- vnsrl.wx: 2
-		- vmsgtu.vx: 2
+	Type V_OPIVX: 2 (Want: 1)
+		- vmsbc.vx: 2
 
-	Type V_OPMVV: 12 (Want: 16)
-		- vmadd.vv: 1
-		- vrem.vv: 2
-		- vremu.vv: 1
-		- vmulh.vv: 1
-		- vmacc.vv: 1
-		- vmul.vv: 2
-		- vwaddu.vv: 1
-		- vsext.vf2: 1
-		- vwsubu.vv: 1
-		- vwmaccu.vv: 1
+	Type V_OPIVV: 2 (Want: 1)
+		- vmaxu.vv: 2
 
-	Type V_OPIVI: 21 (Want: 16)
-		- vmsleu.vi: 2
-		- vmsne.vi: 2
-		- vadc.vim: 1
-		- vmerge.vim: 2
-		- vmsgtu.vi: 2
-		- vmadc.vi: 1
-		- vmsgt.vi: 2
-		- vor.vi: 1
-		- vand.vi: 4
-		- vsra.vi: 1
-		- vnsrl.wi: 1
-		- vadd.vi: 1
-		- vxor.vi: 1
+	Type V_OP_UNIT_STRIDE: 1 (Want: 1)
+		- vsm.v: 1
 
-	Type V_OP_UNIT_STRIDE: 34 (Want: 32)
-		- vse8.v: 8
-		- vse16.v: 2
-		- vle32.v: 4
-		- vse32.v: 3
-		- vle8.v: 8
-		- vle16.v: 3
-		- vlm.v: 3
-		- vsm.v: 3
+	Type M_OP_M: 1 (Want: 1)
+		- mulhsu: 1
 
-	Type V_OP_FAULT_ONLY_FIRST_LOADS: 27 (Want: 32)
-		- vle16ff.v: 12
-		- vle8ff.v: 12
-		- vle32ff.v: 3
+	Type I_OP_R: 0 (Want: 0)
 
-	Type V_OPIVV: 32 (Want: 32)
-		- vadc.vvm: 3
-		- vmsltu.vv: 2
-		- vmsbc.vvm: 2
-		- vmaxu.vv: 3
-		- vminu.vv: 3
-		- vsra.vv: 2
-		- vand.vv: 2
-		- vmseq.vv: 1
-		- vsbc.vvm: 1
-		- vmsleu.vv: 3
-		- vsrl.vv: 2
-		- vadd.vv: 1
-		- vmsle.vv: 1
-		- vxor.vv: 1
-		- vmadc.vv: 1
-		- vmsbc.vv: 2
-		- vor.vv: 1
-		- vnsrl.wv: 1
+	Type I_OP_I: 0 (Want: 0)
 
-	Type I_OP_J: 8 (Want: 3)
-		- jal: 8
+	Type I_OP_S: 0 (Want: 0)
 
-	Type I_OP_S: 15 (Want: 12)
-		- sb: 3
-		- sw: 7
-		- sh: 5
+	Type I_OP_U: 0 (Want: 0)
 
-	Type I_OP_R: 14 (Want: 12)
-		- add: 2
-		- slt: 2
-		- sra: 5
-		- sll: 2
-		- sltu: 2
-		- and: 1
+	Type I_OP_B: 0 (Want: 0)
 
-	Type I_OP_I: 15 (Want: 12)
-		- slti: 2
-		- addi: 1
-		- lhu: 1
-		- srai: 3
-		- lw: 1
-		- xori: 4
-		- lh: 1
-		- sltiu: 1
-		- jalr: 1
+	Type I_OP_J: 0 (Want: 0)
+
+	Type V_OPMVV: 0 (Want: 0)
+
+	Type V_OPMVX: 0 (Want: 0)
+
+	Type V_OP_FAULT_ONLY_FIRST_LOADS: 0 (Want: 0)
+
+	Type V_OP_INDEXED: 0 (Want: 0)
 

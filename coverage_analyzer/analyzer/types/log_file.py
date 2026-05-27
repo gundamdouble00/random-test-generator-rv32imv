@@ -23,4 +23,4 @@ class LogFile:
         self.count_ins: dict[str, dict[str, int]] = defaultdict(
             lambda: defaultdict(int)
         )
-        self.success: bool = False
+        self.success: bool = True

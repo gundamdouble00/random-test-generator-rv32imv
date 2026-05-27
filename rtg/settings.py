@@ -73,6 +73,11 @@ LOOP_N: int = 0
 LOOP_TIME: int = 0 if (LOOP_N <= 0) else (random.randint(1, 10))
 
 RISCV_32_INS = USER_CONFIG["RV32_INSTRUCTIONS"]
+RISCV_32_TYPES: dict[str, RISCVTypes] = {}
+for type, instructions in RISCV_32_INS.items():
+    for ins in instructions:
+        RISCV_32_TYPES[ins] = type
+
 PROGRAM_INS: dict[RISCVTypes, int] = {}
 vector_rate: int = 0
 for key, val in RV32_RATES.items():

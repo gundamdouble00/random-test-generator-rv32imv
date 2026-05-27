@@ -17,8 +17,8 @@ b_ins: list[str] = [
     "bne",
     "blt",
     "bge",
-    "bltu",
-    "bgeu",
+    # "bltu",
+    # "bgeu",
 ]
 
 DATA_SEGMENT: str = ".data"

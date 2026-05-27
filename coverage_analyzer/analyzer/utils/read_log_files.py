@@ -1,7 +1,5 @@
-import concurrent.futures
-import os
-
 from coverage_analyzer.analyzer.types.log_file import LogFile
+from coverage_analyzer.analyzer.utils.multithreading import using_multithreading
 
 LOG_FILES_PATH: str = "./coverage_analyzer/log_files"
 FILE_NAME: str = "rv_assembly"
@@ -29,6 +27,9 @@ def read_file(program: LogFile):
             log_fields: list[str] = log_record.split()
             if log_fields[2] == ">>>>":
                 continue
+
+            if log_fields[2] == "exception":
+                break
 
             address: int = int(log_fields[2], 16)
             if program.body_addr <= address < program.footer_addr:
@@ -69,10 +70,4 @@ def find_body_footer_address() -> tuple[int, int]:
 
 
 def get_executed_ins(log_files: list[LogFile]):
-    max_workers = os.cpu_count()
-    if max_workers is not None:
-        max_workers = max(max_workers // 2, 1)
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-        futures = [executor.submit(read_file, file) for file in log_files]
-        _ = concurrent.futures.wait(futures)
+    using_multithreading(log_files, read_file)

@@ -12,7 +12,6 @@ OUTPUTS: str = "./outputs"
 BIN_FILES: str = OUTPUTS + "/bin_files"
 SPIKE_INPUTS: str = OUTPUTS + "/spike_inputs"
 SPIKE_LOG_FILES: str = OUTPUTS + "/spike_log_files"
-COVERAGE_ANALYZER_LOG: str = "./coverage_analyzer/log_files"
 
 LOG: str = ".log"
 BINARY: str = ".elf"
@@ -27,7 +26,6 @@ num_programs: int = -1
 def delete_old_files():
     execute_deletion(BIN_FILES)
     execute_deletion(SPIKE_LOG_FILES)
-    execute_deletion(COVERAGE_ANALYZER_LOG)
 
 
 def running_riscv_toolchain(command_list: list[str], program_index: int):

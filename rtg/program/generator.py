@@ -5,7 +5,7 @@ from rtg.rv_categories.riscv_infor import riscv32_classes
 from rtg.rv_categories.riscv_types import RISCVTypes
 from rtg.rv_instructions.base_instruction import BaseIntegerIns, BaseVectorIns
 from rtg.rv_instructions.v_extension.base_vector import ConfigurationSetting
-from rtg.settings import PROGRAM_INS, PROGRAM_LEN, RISCV_32_INS
+from rtg.settings import HAS_VECTOR, PROGRAM_INS, PROGRAM_LEN, RISCV_32_INS
 
 
 def generate_obj(
@@ -56,9 +56,19 @@ def add_new_instructions(
 
 def generate_random_program(_: int):
     asm_program = Program()
-    chosen_ins: list[str] = []
     sew_flag: int = 32
     lmul_flag: float = 8.0
+    chosen_ins: list[str] = []
+
+    if not HAS_VECTOR:
+        for key, number in PROGRAM_INS.items():
+            chosen_ins.extend(choose_random_ins(key, number))
+        sew_flag, lmul_flag = add_new_instructions(chosen_ins, -1, -1.0, asm_program)
+        sew_flag, lmul_flag = add_new_instructions(chosen_ins, -1, -1.0, asm_program)
+        asm_program.body = asm_program.body[:PROGRAM_LEN]
+        return asm_program
+
+    # Has Vector Instructions
     cfg_setting: ConfigurationSetting | None = None
     while len(asm_program.body) < PROGRAM_LEN:
         # PROGRAM_INS[RISCVTypes.I_OP_R] = 12 -> key == "I_OP_R" && val == 12
@@ -85,5 +95,4 @@ def generate_random_program(_: int):
         sew_flag = cfg_setting.sew
 
     asm_program.body = asm_program.body[:PROGRAM_LEN]
-
     return asm_program
