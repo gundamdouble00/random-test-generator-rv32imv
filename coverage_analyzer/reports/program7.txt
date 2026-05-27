@@ -2,46 +2,24 @@ Program 7
 Resuls: Passed
 
 Instruction types in program:
-	Type V_OPCFG: 3 (Want: 1)
-		- vsetvli: 3
+	Type V_OPCFG: 5 (Want: 1)
+		- vsetvl: 5
 
-	Type V_OPIVI: 3 (Want: 1)
-		- vnsra.wi: 1
-		- vmsle.vi: 1
-		- vnsrl.wi: 1
-
-	Type V_OP_STRIDED: 2 (Want: 1)
-		- vsse16.v: 2
+	Type V_OPIVV: 2 (Want: 1)
+		- vmsbc.vvm: 2
 
 	Type V_OPIVX: 1 (Want: 1)
-		- vmsbc.vx: 1
-
-	Type V_OPIVV: 1 (Want: 1)
-		- vmaxu.vv: 1
+		- vmerge.vxm: 1
 
 	Type V_OP_UNIT_STRIDE: 1 (Want: 1)
-		- vle8.v: 1
+		- vse16.v: 1
+
+	Type V_OP_STRIDED: 1 (Want: 1)
+		- vlse16.v: 1
+
+	Type V_OPIVI: 1 (Want: 1)
+		- vsll.vi: 1
 
 	Type M_OP_M: 1 (Want: 1)
 		- rem: 1
-
-	Type I_OP_R: 0 (Want: 0)
-
-	Type I_OP_I: 0 (Want: 0)
-
-	Type I_OP_S: 0 (Want: 0)
-
-	Type I_OP_U: 0 (Want: 0)
-
-	Type I_OP_B: 0 (Want: 0)
-
-	Type I_OP_J: 0 (Want: 0)
-
-	Type V_OPMVV: 0 (Want: 0)
-
-	Type V_OPMVX: 0 (Want: 0)
-
-	Type V_OP_FAULT_ONLY_FIRST_LOADS: 0 (Want: 0)
-
-	Type V_OP_INDEXED: 0 (Want: 0)
 

@@ -1,30 +1,16 @@
 Program 11
-Resuls: Failed
+Resuls: Passed
 
 Instruction types in program:
-	Type V_OPCFG: 5 (Want: 1)
-		- vsetvli: 5
+	Type V_OPCFG: 6 (Want: 1)
+		- vsetvl: 6
 
-	Type V_OPIVI: 5 (Want: 1)
-		- vor.vi: 1
-		- vmsle.vi: 2
-		- vnsrl.wi: 1
-		- vsll.vi: 1
+	Type V_OPIVV: 4 (Want: 1)
+		- vmsbc.vvm: 4
 
-	Type V_OP_STRIDED: 2 (Want: 1)
-		- vsse16.v: 2
+	Type V_OPIVX: 1 (Want: 1)
+		- vmerge.vxm: 1
 
-	Type I_OP_R: 0 (Want: 0)
-
-	Type I_OP_I: 0 (Want: 0)
-
-	Type I_OP_S: 0 (Want: 0)
-
-	Type I_OP_U: 0 (Want: 0)
-
-	Type I_OP_B: 0 (Want: 0)
-
-	Type I_OP_J: 0 (Want: 0)
-
-	Type M_OP_M: 0 (Want: 1)
+	Type V_OP_UNIT_STRIDE: 1 (Want: 1)
+		- vse16.v: 1
 
