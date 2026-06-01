@@ -1,26 +1,106 @@
 Program 8
-Resuls: Passed
+Resuls: Failed
 
 Instruction types in program:
-	Type V_OPCFG: 2 (Want: 1)
-		- vsetvl: 2
+	Type V_OPCFG: 9 (Want: 9)
+		- vsetivli: 6
+		- vsetvli: 2
+		- vsetvl: 1
 
-	Type V_OPIVV: 2 (Want: 1)
-		- vmsbc.vvm: 2
+	Type I_OP_R: 6 (Want: 6)
+		- sll: 1
+		- srl: 1
+		- slt: 2
+		- sub: 1
+		- xor: 1
 
-	Type V_OPIVX: 2 (Want: 1)
-		- vsrl.vx: 1
-		- vmerge.vxm: 1
+	Type V_OPMVV: 11 (Want: 9)
+		- vwmacc.vv: 1
+		- vremu.vv: 2
+		- vwmaccu.vv: 1
+		- vnmsac.vv: 1
+		- vmadd.vv: 2
+		- vmulhu.vv: 1
+		- vsext.vf4: 1
+		- vrem.vv: 1
+		- vzext.vf4: 1
 
-	Type V_OP_UNIT_STRIDE: 2 (Want: 1)
-		- vse16.v: 2
+	Type V_OP_UNIT_STRIDE: 13 (Want: 9)
+		- vle32.v: 3
+		- vse8.v: 5
+		- vsm.v: 1
+		- vse16.v: 1
+		- vse32.v: 1
+		- vle8.v: 1
+		- vle16.v: 1
 
-	Type V_OP_STRIDED: 2 (Want: 1)
-		- vsse16.v: 2
+	Type I_OP_U: 4 (Want: 6)
+		- auipc: 3
+		- lui: 1
 
-	Type V_OPIVI: 1 (Want: 1)
+	Type I_OP_S: 4 (Want: 6)
+		- sb: 2
+		- sw: 1
+		- sh: 1
+
+	Type M_OP_M: 11 (Want: 9)
+		- mulhsu: 2
+		- rem: 2
+		- divu: 1
+		- mul: 2
+		- remu: 3
+		- div: 1
+
+	Type V_OPIVV: 6 (Want: 6)
+		- vand.vv: 2
+		- vmadc.vvm: 1
+		- vmslt.vv: 1
+		- vmsle.vv: 1
+		- vadd.vv: 1
+
+	Type I_OP_I: 6 (Want: 6)
+		- lbu: 1
+		- jalr: 1
+		- sltiu: 1
+		- xori: 1
+		- srli: 1
+		- slti: 1
+
+	Type V_OPIVX: 7 (Want: 7)
+		- vmadc.vx: 3
+		- vadd.vx: 1
+		- vsra.vx: 1
+		- vnsra.wx: 1
+		- vmsbc.vxm: 1
+
+	Type V_OPIVI: 10 (Want: 9)
+		- vsrl.vi: 3
+		- vmv.v.i: 1
+		- vmsleu.vi: 1
+		- vmsgt.vi: 1
 		- vsll.vi: 1
+		- vmadc.vi: 1
+		- vmsgtu.vi: 1
+		- vrsub.vi: 1
 
-	Type M_OP_M: 1 (Want: 1)
-		- rem: 1
+	Type V_OPMVX: 5 (Want: 9)
+		- vremu.vx: 1
+		- vmulhu.vx: 1
+		- vmadd.vx: 1
+		- vwmaccu.vx: 1
+		- vwsubu.wx: 1
+
+	Type V_OP_STRIDED: 10 (Want: 9)
+		- vsse32.v: 2
+		- vsse8.v: 3
+		- vlse8.v: 4
+		- vlse16.v: 1
+
+	Type V_OP_FAULT_ONLY_FIRST_LOADS: 10 (Want: 9)
+		- vle16ff.v: 1
+		- vle32ff.v: 6
+		- vle8ff.v: 3
+
+	Type I_OP_J: 8 (Want: 6)
+		- jal: 8
 

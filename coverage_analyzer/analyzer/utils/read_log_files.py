@@ -56,7 +56,7 @@ def read_file(spike_log: LogFile):
 
 
 def find_body_footer_address() -> tuple[int, int]:
-    file_name: str = f"{FILE_NAME}0{BINARY}"  # "rv_assembly0.log"
+    file_name: str = f"{FILE_NAME}0{BINARY}"  # "rv_assembly0.elf"
     elf_file: str = (
         f"{BIN_FILES}/" + file_name
     )  # "./outputs/bin_files/rv_assembly0.elf"

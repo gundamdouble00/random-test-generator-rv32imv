@@ -8,12 +8,11 @@ from rtg.rv_instructions.base_instruction import BaseVectorIns
 from rtg.rv_instructions.utils.get_eew import get_eew
 
 v_sew: list[int] = [8, 16, 32]
-v_lmul: list[float] = [1 / 8, 1 / 4, 1 / 2, 1, 2, 4, 8]
+v_lmul: list[float] = [1 / 4, 1 / 2, 1, 2, 4, 8]
 v_tail: list[str] = ["ta", "tu"]
 v_mask: list[str] = ["ma", "mu"]
 
 LMUL_STRING = {
-    1 / 8: "mf8",
     1 / 4: "mf4",
     1 / 2: "mf2",
     1: "m1",
@@ -88,31 +87,24 @@ class ConfigurationSetting(BaseVectorIns):
         super().__init__(name, index, lmul, sew)
         self.type: str = TYPE_OF_INS[ConfigurationSetting.__name__]
 
-        self.vta: str = ""  # Vector tail agnostic
-        self.vma: str = ""  # Vector mask agnostic
         self.des: str = random.choice(ACTIVE_REG[1:])
         self.src1: str = ""
+        self.lmul: float = lmul
+        self.sew: int = sew
+        self.vta: str = ""  # Vector tail agnostic
+        self.vma: str = ""  # Vector mask agnostic
 
         if name in {"vsetvl", "vsetvli"}:
             self.src1 = random.choice(ACTIVE_REG[1:])
         else:
-            # vsetivli
-            self.src1 = f"{random.randint(1, 31)}"
+            self.src1 = f"{random.randint(1, 31)}"  # name == "vsetivli"
 
-        if self.name == "vsetvl":
+        if (self.name == "vsetvl") and (self.lmul == 1.0) and (self.sew == 32):
             self.src2: str = f"x{VECTOR_VSETVL}"
-            self.lmul: float = 1.0
-            self.sew: int = 32
             self.vta = "tu"
             self.vma = "mu"
             return
 
-        # LMUL >= SEW/ELEN
-        while True:
-            self.sew = random.choice(v_sew)
-            self.lmul = random.choice(v_lmul)
-            if self.lmul * 32 >= float(self.sew):
-                break
         self.vta = random.choice(v_tail)
         self.vma = random.choice(v_mask)
 

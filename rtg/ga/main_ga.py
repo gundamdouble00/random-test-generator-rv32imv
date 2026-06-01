@@ -7,6 +7,9 @@ from rtg.ga.utils import add_label_loop, save_to_file, set_up_link_origin
 from rtg.program.program import Program
 from rtg.settings import NUM_GENERATIONS, TEST_CASES
 
+LMUL: list[float] = [1 / 4, 1 / 2, 1.0, 2.0, 4.0, 8.0]
+SEW = [8, 16, 32]
+
 
 def genetic_algorithm():
     # Initialize Population

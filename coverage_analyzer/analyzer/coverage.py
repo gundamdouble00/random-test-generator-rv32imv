@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from coverage_analyzer.analyzer.types.log_file import LogFile
+from coverage_analyzer.analyzer.utils.analyze_files import check_programs
 from coverage_analyzer.analyzer.utils.read_log_files import (
     find_body_footer_address,
     get_executed_ins,
@@ -19,9 +20,9 @@ def coverage_testing(log_files: list[LogFile]):
     for current_file in log_files:
         if len(current_file.body_ins) != 520:
             print(f"{current_file.index} ({len(current_file.body_ins)})")
-            # for ins in current_file.body_ins:
-            #     print(ins)
-            # break
+            for ins in current_file.body_ins:
+                print(ins)
+            break
 
 
 def main():
@@ -38,16 +39,20 @@ def main():
 
     get_executed_ins(log_files)
 
+    check_programs(log_files)
+
     generate_reports(log_files)
 
     # # # # TESTING # # # # # #
-    coverage_testing(log_files)
+    # coverage_testing(log_files)
     # # # # # # # # # # # # # #
 
     failed: int = 0
     for file in log_files:
         if not file.success:
             failed += 1
+            print(f"Program {file.index}: Failed")
+
     print(f"{failed} programs failed")
 
 

@@ -2,6 +2,7 @@ import random
 from typing import override
 
 from rtg.rv_categories.registers import (
+    ACTIVE_REG,
     BASE_MEM_ADDR,
     EXTRA_FUNC1,
     EXTRA_FUNC2,
@@ -12,6 +13,8 @@ from rtg.rv_categories.riscv_types import TYPE_OF_INS
 from rtg.rv_instructions.base_instruction import BaseIntegerIns
 from rtg.rv_instructions.utils.random_regs import rand_active_regs, rand_all_regs
 from rtg.settings import HAS_STRIDED, WORD_MEMORY
+
+PREFETCH_DES_REG: set[str] = {"x0", "x1"}
 
 
 class ITypeIns(BaseIntegerIns):
@@ -53,7 +56,7 @@ class ITypeIns(BaseIntegerIns):
         addi, andi, ori, xori, slti, sltiu, slli, srli, srai rd, rs1, imm
         """
 
-        if (self.name == "add") and (random.random() < 0.26) and HAS_STRIDED:
+        if (self.name == "addi") and (random.random() < 0.26) and HAS_STRIDED:
             self.des, self.src1 = f"x{VECTOR_STRIDED}", "x0"
             num: int = WORD_MEMORY // 2
             while num % 4 != 0:
@@ -64,13 +67,14 @@ class ITypeIns(BaseIntegerIns):
             return
 
         start, end = -2048, 2047
+        imm = random.randint(start, end)
         if self.name in {"slli", "srli", "srai"}:
             imm = random.randint(0, 31)
-        else:
-            imm = random.randint(start, end)
 
         self.src1 = rand_all_regs()
         self.imm = f"{imm}"
+        if (self.name == "ori") and (self.des in PREFETCH_DES_REG):
+            self.des = random.choice(ACTIVE_REG[1:])
 
     def __init__(self, name: str, index: int) -> None:
         super().__init__(name, index)

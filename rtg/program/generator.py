@@ -5,94 +5,134 @@ from rtg.rv_categories.riscv_infor import riscv32_classes
 from rtg.rv_categories.riscv_types import RISCVTypes
 from rtg.rv_instructions.base_instruction import BaseIntegerIns, BaseVectorIns
 from rtg.rv_instructions.v_extension.base_vector import ConfigurationSetting
-from rtg.settings import HAS_VECTOR, PROGRAM_INS, PROGRAM_LEN, RISCV_32_INS
+from rtg.settings import (
+    HAS_VECTOR,
+    INSTRUCTIONS_PER_PATH,
+    PROGRAM_INS,
+    PROGRAM_LEN,
+    RISCV_32_INS,
+    settings,
+)
+
+cfg_setting_ins: list[str] = ["vsetvli", "vsetivli"]
+riscv32_types: list[str] = list(PROGRAM_INS.keys())
 
 
-def generate_obj(
-    name: str,
-    index: int,
-    lmul: float,
-    sew: int,
-) -> BaseIntegerIns | BaseVectorIns | None:
-    riscv_class = riscv32_classes.get(name)
+def generate_obj(current_type: str, current_index: int, lmul: float, sew: int):
+    while True:
+        current_ins = random.choice(RISCV_32_INS[current_type])
+        riscv_class = riscv32_classes.get(current_ins)
+        if riscv_class is None:
+            continue
 
-    if not riscv_class:
-        return None
+        try:
+            if issubclass(riscv_class, BaseVectorIns):
+                riscv_obj = riscv_class(current_ins, current_index, lmul, sew)
+            else:
+                riscv_obj = riscv_class(current_ins, current_index)
+            break
 
-    try:
-        if issubclass(riscv_class, BaseIntegerIns):
-            riscv_obj = riscv_class(name, index)
-        else:
-            riscv_obj = riscv_class(name, index, lmul, sew)
-    except ValueError:
-        return None
+        except ValueError:
+            continue
 
     return riscv_obj
 
 
-def choose_random_ins(type: str, number: int) -> list[str]:
-    return [random.choice(RISCV_32_INS[type]) for _ in range(number)]
+def only_integer(asm_program: Program, chosen_ins: list[str]):
+    if not HAS_VECTOR:
+        for type, number in PROGRAM_INS.items():
+            random_ins = [random.choice(RISCV_32_INS[type]) for _ in range(number)]
+            chosen_ins.extend(random_ins)
 
+        for _ in range(2):
+            random.shuffle(chosen_ins)
+            for instruction in chosen_ins:
+                riscv_class = riscv32_classes.get(instruction)
+                if (riscv_class is not None) and issubclass(
+                    riscv_class, BaseIntegerIns
+                ):
+                    riscv_obj = riscv_class(instruction, len(asm_program.body))
+                    asm_program.body.append(riscv_obj)
 
-def add_new_instructions(
-    chosen_ins: list[str],
-    sew_flag: int,
-    lmul_flag: float,
-    asm_program: Program,
-) -> tuple[int, float]:
-    random.shuffle(chosen_ins)
-    for ins in chosen_ins:
-        # print(ins)
-        riscv_obj = generate_obj(ins, len(asm_program.body), lmul_flag, sew_flag)
-        if riscv_obj is not None:
-            asm_program.body.append(riscv_obj)
-            asm_program.count_type[riscv_obj.type] += 1
-            if isinstance(riscv_obj, ConfigurationSetting):
-                sew_flag = riscv_obj.sew
-                lmul_flag = riscv_obj.lmul
-
-    return (sew_flag, lmul_flag)
+        asm_program.body = asm_program.body[:PROGRAM_LEN]
+        return asm_program
 
 
 def generate_random_program(_: int):
     asm_program = Program()
-    sew_flag: int = 32
-    lmul_flag: float = 8.0
     chosen_ins: list[str] = []
 
     if not HAS_VECTOR:
-        for key, number in PROGRAM_INS.items():
-            chosen_ins.extend(choose_random_ins(key, number))
-        sew_flag, lmul_flag = add_new_instructions(chosen_ins, -1, -1.0, asm_program)
-        sew_flag, lmul_flag = add_new_instructions(chosen_ins, -1, -1.0, asm_program)
-        asm_program.body = asm_program.body[:PROGRAM_LEN]
-        return asm_program
+        return only_integer(asm_program, chosen_ins)
 
     # Has Vector Instructions
-    cfg_setting: ConfigurationSetting | None = None
-    while len(asm_program.body) < PROGRAM_LEN:
-        # PROGRAM_INS[RISCVTypes.I_OP_R] = 12 -> key == "I_OP_R" && val == 12
-        chosen_ins = []
-        for key, number in PROGRAM_INS.items():
-            if number > asm_program.count_type[key]:
-                missing_num: int = number - asm_program.count_type[key]
-                chosen_ins.extend(choose_random_ins(key, missing_num))
-
-        if (cfg_setting is not None) and len(chosen_ins) != 0:
-            asm_program.body.append(cfg_setting)
-            sew_flag, lmul_flag = add_new_instructions(
-                chosen_ins, sew_flag, lmul_flag, asm_program
-            )
-
-        cfg_setting = ConfigurationSetting(
-            random.choice(["vsetvl", "vsetvli", "vsetivli"]),
-            len(asm_program.body),
-            lmul_flag,
-            sew_flag,
+    sew, lmul = -1, -1.0
+    for i in range(len(settings)):
+        SETTING = settings[i]
+        sew, lmul = SETTING[0], SETTING[1]
+        cfg_ins: str = (
+            "vsetvl"
+            if (sew == 32 and lmul == 1.0)
+            else (random.choice(cfg_setting_ins))
         )
-        asm_program.body.append(cfg_setting)
-        lmul_flag = cfg_setting.lmul
-        sew_flag = cfg_setting.sew
+        cfg_obj = ConfigurationSetting(cfg_ins, len(asm_program.body), lmul, sew)
+        asm_program.count_type[cfg_obj.type] += 1
+        riscv32_objects: list[BaseIntegerIns | BaseVectorIns] = []
+
+        while len(riscv32_objects) < INSTRUCTIONS_PER_PATH - 1:
+            missing_flag: bool = False
+            for type, number in PROGRAM_INS.items():
+                if number == 0.0:
+                    continue
+
+                if asm_program.count_type[type] < number:
+                    missing_flag = True
+                    break
+
+            if not missing_flag:
+                break
+
+            current_type: str = random.choice(riscv32_types)
+            if current_type == RISCVTypes.V_OPCFG:
+                continue
+
+            if (
+                asm_program.count_type[current_type]
+                < PROGRAM_INS[RISCVTypes(current_type)]
+            ):
+                current_index: int = len(asm_program.body) + len(riscv32_objects) + 1
+                riscv_obj = generate_obj(current_type, current_index, lmul, sew)
+                riscv32_objects.append(riscv_obj)
+                asm_program.count_type[riscv_obj.type] += 1
+
+        random.shuffle(riscv32_objects)
+        asm_program.body.append(cfg_obj)
+        asm_program.body.extend(riscv32_objects)
+
+    missing_ins: list[BaseIntegerIns | BaseVectorIns] = []
+    for type, number in PROGRAM_INS.items():
+        if asm_program.count_type[type] < number:
+            riscv32_objects = []
+            missing_number: int = number - asm_program.count_type[type]
+            while len(riscv32_objects) < missing_number:
+                current_index = len(asm_program.body) + len(riscv32_objects) + 1
+                riscv_obj = generate_obj(type, current_index, lmul, sew)
+                riscv32_objects.append(riscv_obj)
+                asm_program.count_type[riscv_obj.type] += 1
+
+            missing_ins.extend(riscv32_objects)
+
+    random.shuffle(missing_ins)
+    asm_program.body.extend(missing_ins)
+
+    while len(asm_program.body) < PROGRAM_LEN:
+        current_type = random.choice(riscv32_types)
+        if current_type == RISCVTypes.V_OPCFG:
+            continue
+
+        riscv_obj = generate_obj(current_type, len(asm_program.body), lmul, sew)
+        asm_program.body.append(riscv_obj)
+        asm_program.count_type[riscv_obj.type] += 1
 
     asm_program.body = asm_program.body[:PROGRAM_LEN]
     return asm_program

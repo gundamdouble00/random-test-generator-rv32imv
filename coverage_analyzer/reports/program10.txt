@@ -1,21 +1,106 @@
 Program 10
-Resuls: Passed
+Resuls: Failed
 
 Instruction types in program:
-	Type V_OPCFG: 3 (Want: 1)
-		- vsetvl: 3
+	Type V_OPCFG: 9 (Want: 9)
+		- vsetivli: 6
+		- vsetvli: 2
+		- vsetvl: 1
 
-	Type V_OPIVV: 3 (Want: 1)
-		- vadc.vvm: 1
-		- vmsbc.vvm: 2
+	Type I_OP_R: 6 (Want: 6)
+		- slt: 1
+		- srl: 1
+		- xor: 2
+		- sub: 1
+		- sra: 1
 
-	Type V_OPIVX: 2 (Want: 1)
-		- vmerge.vxm: 1
-		- vsra.vx: 1
+	Type V_OPMVV: 11 (Want: 9)
+		- vwmacc.vv: 1
+		- vremu.vv: 2
+		- vmadd.vv: 2
+		- vzext.vf4: 1
+		- vmulhu.vv: 1
+		- vsext.vf4: 1
+		- vrem.vv: 1
+		- vdiv.vv: 1
+		- vmacc.vv: 1
 
-	Type V_OP_UNIT_STRIDE: 2 (Want: 1)
-		- vse16.v: 2
+	Type V_OP_UNIT_STRIDE: 13 (Want: 9)
+		- vle32.v: 2
+		- vse8.v: 4
+		- vse16.v: 3
+		- vsm.v: 1
+		- vle16.v: 2
+		- vlm.v: 1
 
-	Type V_OP_STRIDED: 2 (Want: 1)
-		- vsse16.v: 2
+	Type I_OP_U: 4 (Want: 6)
+		- auipc: 4
+
+	Type I_OP_S: 4 (Want: 6)
+		- sb: 3
+		- sh: 1
+
+	Type M_OP_M: 11 (Want: 9)
+		- mulhsu: 4
+		- rem: 2
+		- mulhu: 1
+		- mul: 3
+		- remu: 1
+
+	Type V_OPIVV: 6 (Want: 6)
+		- vadd.vv: 1
+		- vmadc.vvm: 1
+		- vmsbc.vvm: 1
+		- vmsle.vv: 1
+		- vmaxu.vv: 1
+		- vmsleu.vv: 1
+
+	Type I_OP_I: 6 (Want: 6)
+		- lbu: 1
+		- ori: 1
+		- sltiu: 1
+		- xori: 1
+		- andi: 1
+		- slti: 1
+
+	Type V_OPIVX: 7 (Want: 7)
+		- vmadc.vx: 1
+		- vmaxu.vx: 1
+		- vmadc.vxm: 1
+		- vadc.vxm: 1
+		- vmslt.vx: 1
+		- vnsra.wx: 1
+		- vsrl.vx: 1
+
+	Type V_OPIVI: 10 (Want: 9)
+		- vsll.vi: 1
+		- vmv.v.i: 1
+		- vmsleu.vi: 2
+		- vmsgtu.vi: 2
+		- vmsgt.vi: 1
+		- vmadc.vim: 1
+		- vmsle.vi: 1
+		- vrsub.vi: 1
+
+	Type V_OPMVX: 5 (Want: 9)
+		- vmul.vx: 1
+		- vmulhsu.vx: 1
+		- vdivu.vx: 1
+		- vrem.vx: 1
+		- vmulh.vx: 1
+
+	Type V_OP_STRIDED: 10 (Want: 9)
+		- vlse8.v: 4
+		- vsse8.v: 2
+		- vlse16.v: 1
+		- vsse32.v: 2
+		- vlse32.v: 1
+
+	Type V_OP_FAULT_ONLY_FIRST_LOADS: 10 (Want: 9)
+		- vle16ff.v: 1
+		- vle8ff.v: 4
+		- vle32ff.v: 5
+
+	Type I_OP_J: 8 (Want: 6)
+		- jal: 8
 

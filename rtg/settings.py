@@ -81,7 +81,8 @@ for type, instructions in RISCV_32_INS.items():
 PROGRAM_INS: dict[RISCVTypes, int] = {}
 vector_rate: int = 0
 for key, val in RV32_RATES.items():
-    PROGRAM_INS[RISCVTypes(key)] = (PROGRAM_LEN * val) // 100
+    if val > 0.0:
+        PROGRAM_INS[RISCVTypes(key)] = (PROGRAM_LEN * val) // 100
 
     if key.startswith("V"):
         vector_rate += val
@@ -94,3 +95,15 @@ DATA_HAZARD_SCORE = get_integer_value(RTG_CONFIG, "DATA_HAZARD_SCORE")
 NEGATIVE_IMM_SCORE = get_integer_value(RTG_CONFIG, "NEGATIVE_IMM_SCORE")
 SAME_OPERANDS_SCORE = get_integer_value(RTG_CONFIG, "SAME_OPERANDS_SCORE")
 PENALTY_PER_MISSING = get_integer_value(RTG_CONFIG, "PENALTY_PER_MISSING")
+
+if HAS_VECTOR:
+    v_sew: list[int] = [8, 16, 32]
+    v_lmul: list[float] = [1 / 4, 1 / 2, 1, 2, 4, 8]
+    settings: list[tuple[int, float]] = []
+    vector_cfg_num: int = PROGRAM_INS[RISCVTypes.V_OPCFG]
+    INSTRUCTIONS_PER_PATH: int = PROGRAM_LEN // vector_cfg_num
+    while len(settings) < vector_cfg_num:
+        sew = random.choice(v_sew)
+        lmul = random.choice(v_lmul)
+        if lmul >= (sew / 32):
+            settings.append((sew, lmul))

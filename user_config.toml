@@ -1,5 +1,5 @@
 TEST_CASES = 12 # The number of test cases
-PROGRAM_LEN = 12 # The length of the body program
+PROGRAM_LEN = 120 # The length of the body program
 
 # TEXT is the text memory, DATA is the data memory
 # ORIGIN is the base address of the current memory region. ORIGIN must be a "hex" string
@@ -324,23 +324,23 @@ I_OP_B = 0
 I_OP_J = 5
 
 # M Extension for Integer Multiplication and Division
-M_OP_M = 10
+M_OP_M = 8
 
 # V Standard Extension for VectorOperations
 # Vector Integer Arithmetic Instructions
-V_OPIVV = 10
-V_OPIVX = 10
-V_OPIVI = 10
-V_OPMVV = 0
-V_OPMVX = 0
+V_OPIVV = 5
+V_OPIVX = 6
+V_OPIVI = 8
+V_OPMVV = 8
+V_OPMVX = 8
 # Configuration-Setting Instructions
-V_OPCFG = 10
+V_OPCFG = 8
 # Vector Loads and Stores
 # Unit-stride
-V_OP_UNIT_STRIDE = 10
+V_OP_UNIT_STRIDE = 8
 # Unit-stride Fault-Only-First Loads
-V_OP_FAULT_ONLY_FIRST_LOADS = 5
+V_OP_FAULT_ONLY_FIRST_LOADS = 8
 # Strided
-V_OP_STRIDED = 10
+V_OP_STRIDED = 8
 # Indexed
 V_OP_INDEXED = 0
