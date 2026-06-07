@@ -19,6 +19,11 @@ def write_report(log_file: LogFile):
         _ = f.write(f"Resuls: {result}\n")
 
         _ = f.write("\n")
+        _ = f.write("Data Hazards:\n")
+        for key, value in log_file.data_hazards.items():
+            _ = f.write(f"\t{key}: {value}\n")
+
+        _ = f.write("\n")
         _ = f.write("Instruction types in program:\n")
         for key, value in log_file.count_type.items():
             _ = f.write(

@@ -18,6 +18,9 @@ BINARY: str = ".elf"
 ASSEMBLY: str = ".s"
 FILE_NAME: str = "rv_assembly"
 
+SUCCESSFULL: str = "successfull"
+UNSUCCESSFULL: str = "unsuccessfull"
+
 base_dir = os.path.dirname(os.path.abspath(__file__))
 linker_script = os.path.join(base_dir, "link.ld")
 num_programs: int = -1
@@ -93,8 +96,15 @@ def compile_asm_files():
         )
         results = list(result_iterator)
 
+    compile_failed: int = 0
     for info in results:
-        print(info)
+        messages: list[str] = info.split()
+        messages_len: int = len(messages)
+        if messages[messages_len - 1] == UNSUCCESSFULL:
+            print(info)
+            compile_failed += 1
+
+    print(f"Compilation unsuccessful: {compile_failed} programs")
 
 
 def running_spike_riscv_isa_sim(cmd: list[str], program_index: int):
@@ -158,8 +168,15 @@ def spike_executing():
         )
         results = list(result_iterator)
 
+    execute_failed: int = 0
     for info in results:
-        print(info)
+        messages: list[str] = info.split()
+        messages_len: int = len(messages)
+        if messages[messages_len - 1] == UNSUCCESSFULL:
+            print(info)
+            execute_failed += 1
+
+    print(f"Execution unsuccessful: {execute_failed} programs")
 
 
 def main():
@@ -174,4 +191,8 @@ def main():
 
 
 if __name__ == "__main__":
+    start = time.time()
+    print("Starting Compiling and Executing")
     main()
+    end = time.time()
+    print(f"Finished in {end - start:.2f} seconds.")

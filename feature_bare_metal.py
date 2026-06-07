@@ -1,5 +1,6 @@
 import concurrent.futures
 import os
+import time
 
 from delete_all_files import execute_deletion
 
@@ -38,4 +39,8 @@ def main():
 
 
 if __name__ == "__main__":
+    start = time.time()
+    print("Starting adding Startup and Exit code")
     main()
+    end = time.time()
+    print(f"Finished in {end - start:.2f} seconds.")

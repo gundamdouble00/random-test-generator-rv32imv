@@ -1,104 +1,76 @@
 Program 11
-Resuls: Failed
+Resuls: Passed
+
+Data Hazards:
+	Read after Write: 49
+	Write after Read: 17
+	Write after Write: 23
 
 Instruction types in program:
-	Type V_OPCFG: 9 (Want: 9)
-		- vsetivli: 6
-		- vsetvli: 2
-		- vsetvl: 1
+	Type V_OPCFG: 3 (Want: 3)
+		- vsetivli: 3
 
-	Type I_OP_R: 6 (Want: 6)
-		- sll: 1
-		- srl: 1
-		- xor: 2
-		- sub: 2
+	Type V_OP_FAULT_ONLY_FIRST_LOADS: 3 (Want: 3)
+		- vle16ff.v: 3
 
-	Type V_OPMVV: 11 (Want: 9)
-		- vmul.vv: 1
-		- vremu.vv: 1
-		- vwmaccu.vv: 1
-		- vnmsub.vv: 1
-		- vmadd.vv: 1
-		- vmulhu.vv: 2
-		- vsext.vf4: 1
-		- vrem.vv: 2
-		- vdiv.vv: 1
-
-	Type V_OP_UNIT_STRIDE: 13 (Want: 9)
-		- vle32.v: 3
-		- vse8.v: 5
+	Type V_OP_UNIT_STRIDE: 4 (Want: 3)
+		- vle16.v: 1
 		- vsm.v: 1
+		- vle32.v: 1
 		- vse16.v: 1
-		- vle16.v: 2
-		- vlm.v: 1
 
-	Type I_OP_U: 4 (Want: 6)
-		- auipc: 3
+	Type V_OPIVV: 3 (Want: 3)
+		- vxor.vv: 1
+		- vmsne.vv: 1
+		- vmadc.vv: 1
+
+	Type V_OPIVI: 4 (Want: 4)
+		- vmadc.vim: 1
+		- vmsne.vi: 1
+		- vmseq.vi: 1
+		- vmerge.vim: 1
+
+	Type V_OPMVV: 4 (Want: 4)
+		- vdivu.vv: 1
+		- vdiv.vv: 1
+		- vmulhsu.vv: 1
+		- vremu.vv: 1
+
+	Type I_OP_S: 3 (Want: 3)
+		- sw: 1
+		- sb: 2
+
+	Type V_OPIVX: 4 (Want: 4)
+		- vmaxu.vx: 2
+		- vmsle.vx: 1
+		- vxor.vx: 1
+
+	Type I_OP_U: 3 (Want: 3)
+		- auipc: 2
 		- lui: 1
 
-	Type I_OP_S: 4 (Want: 6)
-		- sb: 2
-		- sw: 1
-		- sh: 1
-
-	Type M_OP_M: 11 (Want: 9)
-		- mulhsu: 2
-		- rem: 2
-		- divu: 1
-		- mul: 2
-		- remu: 3
-		- div: 1
-
-	Type V_OPIVV: 6 (Want: 6)
-		- vand.vv: 2
-		- vmv.v.v: 1
-		- vsrl.vv: 1
-		- vmsle.vv: 1
-		- vadd.vv: 1
-
-	Type I_OP_I: 6 (Want: 6)
+	Type I_OP_I: 5 (Want: 3)
+		- slti: 2
 		- lbu: 1
-		- jalr: 1
-		- sltiu: 1
+		- andi: 1
 		- xori: 1
-		- srli: 1
-		- slti: 1
 
-	Type V_OPIVX: 7 (Want: 7)
-		- vmadc.vx: 3
-		- vadd.vx: 1
-		- vsra.vx: 1
-		- vnsra.wx: 1
-		- vmsbc.vxm: 1
+	Type V_OPMVX: 4 (Want: 4)
+		- vwadd.wx: 1
+		- vmacc.vx: 1
+		- vwsubu.vx: 1
+		- vnmsub.vx: 1
 
-	Type V_OPIVI: 10 (Want: 9)
-		- vsrl.vi: 1
-		- vmv.v.i: 1
-		- vmsleu.vi: 2
-		- vmsgtu.vi: 1
-		- vmsgt.vi: 1
-		- vsll.vi: 1
-		- vmadc.vi: 1
-		- vand.vi: 1
-		- vrsub.vi: 1
+	Type I_OP_J: 2 (Want: 2)
+		- jal: 2
 
-	Type V_OPMVX: 5 (Want: 9)
-		- vremu.vx: 1
-		- vmulhu.vx: 1
-		- vdivu.vx: 1
-		- vwmaccu.vx: 1
-		- vwsubu.wx: 1
+	Type I_OP_R: 4 (Want: 3)
+		- add: 1
+		- sub: 1
+		- and: 2
 
-	Type V_OP_STRIDED: 10 (Want: 9)
-		- vsse32.v: 2
-		- vsse8.v: 4
-		- vlse8.v: 4
-
-	Type V_OP_FAULT_ONLY_FIRST_LOADS: 10 (Want: 9)
-		- vle16ff.v: 2
-		- vle8ff.v: 5
-		- vle32ff.v: 3
-
-	Type I_OP_J: 8 (Want: 6)
-		- jal: 8
+	Type M_OP_M: 4 (Want: 3)
+		- remu: 1
+		- mulhsu: 2
+		- mulhu: 1
 

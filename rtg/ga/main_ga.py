@@ -17,7 +17,7 @@ def genetic_algorithm():
 
     # Start Evolutionary Generational Cycle
     new_generation: list[Program] = []
-    for _ in range(NUM_GENERATIONS):
+    for i in range(NUM_GENERATIONS):
         # Calculate Individuals' fitness
         fitness_evaluation(population)
 

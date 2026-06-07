@@ -42,11 +42,11 @@ def data_hazards(dictionary: dict[str, int], value: str):
 
 
 def update_reg_dict(dictionary: dict[str, int], register: str, value: int):
-    if len(register) != 3:
+    if len(register) > 3 or len(register) < 2:
         return
-    if (register[0] not in {"v", "x"}) or (not is_integer(register[1:])):
-        return
-    dictionary[register] += value
+
+    if (register[0] in {"v", "x"}) and (is_integer(register[1:])):
+        dictionary[register] += value
 
 
 def same_registers(regs: set[str], cur_reg: str):
@@ -68,7 +68,7 @@ def calculate_fitness(individual: Program):
         # Subtract score if the program doesn't have enough instructions in a type
         actual = individual.count_type[type]
         if want > actual:
-            fitness_score -= PENALTY_PER_MISSING
+            fitness_score -= PENALTY_PER_MISSING * (want - actual)
 
         # Calculate variety of instructions in a specific type
         if actual == 0:

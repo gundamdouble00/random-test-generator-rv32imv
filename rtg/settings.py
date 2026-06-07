@@ -96,14 +96,19 @@ NEGATIVE_IMM_SCORE = get_integer_value(RTG_CONFIG, "NEGATIVE_IMM_SCORE")
 SAME_OPERANDS_SCORE = get_integer_value(RTG_CONFIG, "SAME_OPERANDS_SCORE")
 PENALTY_PER_MISSING = get_integer_value(RTG_CONFIG, "PENALTY_PER_MISSING")
 
+settings: list[tuple[int, float]] = []
+instructions_per_path: int = -1
 if HAS_VECTOR:
     v_sew: list[int] = [8, 16, 32]
     v_lmul: list[float] = [1 / 4, 1 / 2, 1, 2, 4, 8]
-    settings: list[tuple[int, float]] = []
     vector_cfg_num: int = PROGRAM_INS[RISCVTypes.V_OPCFG]
-    INSTRUCTIONS_PER_PATH: int = PROGRAM_LEN // vector_cfg_num
+    if vector_cfg_num == 0:
+        vector_cfg_num = 1
+
+    instructions_per_path = PROGRAM_LEN // vector_cfg_num
     while len(settings) < vector_cfg_num:
         sew = random.choice(v_sew)
         lmul = random.choice(v_lmul)
         if lmul >= (sew / 32):
             settings.append((sew, lmul))
+INSTRUCTIONS_PER_PATH = instructions_per_path

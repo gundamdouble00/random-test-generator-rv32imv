@@ -1,18 +1,18 @@
 TEST_CASES = 12 # The number of test cases
-PROGRAM_LEN = 120 # The length of the body program
+PROGRAM_LEN = 50 # The length of the body program, it should be at least 50
 
 # TEXT is the text memory, DATA is the data memory
 # ORIGIN is the base address of the current memory region. ORIGIN must be a "hex" string
-# LENGTH is the length of the current memory region, calculated in KB
+# LENGTH is the length of the current memory region, calculated in KiB
 [TEXT]
-ORIGIN = "0x12000000"
-SIZE = 32 # KB
-[DATA]
 ORIGIN = "0x20000000"
-SIZE = 16 # KB
+SIZE = 32 # KiB
+[DATA]
+ORIGIN = "0x12000000"
+SIZE = 16 # KiB
 
-# The instrucions are supported in the RTG
-# You can comment instrucions which are not exist in your design
+# The instructions are supported in the RTG
+# You can comment instructions which are not exist in your design
 [RV32_INSTRUCTIONS]
 V_OPIVV = [
     # Vector Single-Width Integer Add and Subtract
@@ -152,8 +152,6 @@ V_OPMVV = [
     "vsext.vf2",
     "vzext.vf4",
     "vsext.vf4",
-    "vzext.vf8",
-    "vsext.vf8",
     # Vector Single-Width Integer Multiply-Add Instructions
     "vmacc.vv",
     "vnmsac.vv",
@@ -316,31 +314,31 @@ M_OP_M = [
 # The sum of rates must equal to 100
 [RV32_RATES]
 # RV32I Base Integer Instruction Set
-I_OP_R = 5
-I_OP_I = 5
-I_OP_S = 5
-I_OP_U = 5
+I_OP_R = 7
+I_OP_I = 7
+I_OP_S = 7
+I_OP_U = 7
 I_OP_B = 0
 I_OP_J = 5
 
 # M Extension for Integer Multiplication and Division
-M_OP_M = 8
+M_OP_M = 7
 
-# V Standard Extension for VectorOperations
+# V Standard Extension for Vector Operations
 # Vector Integer Arithmetic Instructions
-V_OPIVV = 5
-V_OPIVX = 6
+V_OPIVV = 7
+V_OPIVX = 8
 V_OPIVI = 8
 V_OPMVV = 8
 V_OPMVX = 8
 # Configuration-Setting Instructions
-V_OPCFG = 8
+V_OPCFG = 7
 # Vector Loads and Stores
 # Unit-stride
-V_OP_UNIT_STRIDE = 8
+V_OP_UNIT_STRIDE = 7
 # Unit-stride Fault-Only-First Loads
-V_OP_FAULT_ONLY_FIRST_LOADS = 8
+V_OP_FAULT_ONLY_FIRST_LOADS = 7
 # Strided
-V_OP_STRIDED = 8
+V_OP_STRIDED = 0
 # Indexed
 V_OP_INDEXED = 0

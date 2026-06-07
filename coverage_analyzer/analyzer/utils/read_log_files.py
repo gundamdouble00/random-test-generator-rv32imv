@@ -3,6 +3,7 @@ import subprocess
 from coverage_analyzer.analyzer.types.log_file import LogFile
 from coverage_analyzer.analyzer.types.pseudo_ins import PSEUDO_INS
 from coverage_analyzer.analyzer.utils.multithreading import using_multithreading
+from coverage_analyzer.analyzer.utils.parse_rv_ins import delete_comma
 from rtg.rv_categories.riscv_types import RISCVTypes
 from rtg.settings import RISCV_32_TYPES
 
@@ -25,6 +26,7 @@ def read_file(spike_log: LogFile):
     )  # "./outputs/spike_log_files/rv_assembly26.log"
 
     with open(log_file, "r") as file:
+        body_flag: bool = False
         for log_record in file:
             # core   0: 0x12000478 (0x019d8457) vadd.vv v8, v25, v27, v0.t
             # core   0: 0x12000298 (0x01e20eb3) add     t4, tp, t5
@@ -33,6 +35,8 @@ def read_file(spike_log: LogFile):
             # core   0: exception trap_illegal_instruction, epc 0x12000454
             log_fields: list[str] = log_record.split()
             if log_fields[2] == ">>>>":
+                if log_fields[3] == "body":
+                    body_flag = True
                 continue
 
             if log_fields[2] == "exception":
@@ -42,6 +46,7 @@ def read_file(spike_log: LogFile):
             if cur_ins[0] in PSEUDO_INS.keys():
                 cur_ins = PSEUDO_INS[cur_ins[0]](cur_ins)
 
+            cur_ins = delete_comma(cur_ins)
             address: int = int(log_fields[2], 16)
             if (spike_log.body_addr <= address < spike_log.footer_addr) and (
                 address not in spike_log.address_flag
@@ -52,7 +57,9 @@ def read_file(spike_log: LogFile):
                 ins_type: RISCVTypes = RISCV_32_TYPES[ins_name]
                 spike_log.count_type[ins_type] += 1
                 spike_log.count_ins[ins_type][ins_name] += 1
-            spike_log.executed_ins.append(cur_ins)
+
+            if body_flag:
+                spike_log.executed_ins.append(cur_ins)
 
 
 def find_body_footer_address() -> tuple[int, int]:

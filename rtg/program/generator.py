@@ -39,23 +39,20 @@ def generate_obj(current_type: str, current_index: int, lmul: float, sew: int):
 
 
 def only_integer(asm_program: Program, chosen_ins: list[str]):
-    if not HAS_VECTOR:
-        for type, number in PROGRAM_INS.items():
-            random_ins = [random.choice(RISCV_32_INS[type]) for _ in range(number)]
-            chosen_ins.extend(random_ins)
+    for type, number in PROGRAM_INS.items():
+        random_ins = [random.choice(RISCV_32_INS[type]) for _ in range(number)]
+        chosen_ins.extend(random_ins)
 
-        for _ in range(2):
-            random.shuffle(chosen_ins)
-            for instruction in chosen_ins:
-                riscv_class = riscv32_classes.get(instruction)
-                if (riscv_class is not None) and issubclass(
-                    riscv_class, BaseIntegerIns
-                ):
-                    riscv_obj = riscv_class(instruction, len(asm_program.body))
-                    asm_program.body.append(riscv_obj)
+    for _ in range(2):
+        random.shuffle(chosen_ins)
+        for instruction in chosen_ins:
+            riscv_class = riscv32_classes.get(instruction)
+            if (riscv_class is not None) and issubclass(riscv_class, BaseIntegerIns):
+                riscv_obj = riscv_class(instruction, len(asm_program.body))
+                asm_program.body.append(riscv_obj)
 
-        asm_program.body = asm_program.body[:PROGRAM_LEN]
-        return asm_program
+    asm_program.body = asm_program.body[:PROGRAM_LEN]
+    return asm_program
 
 
 def generate_random_program(_: int):
