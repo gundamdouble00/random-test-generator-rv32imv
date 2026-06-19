@@ -1,3 +1,6 @@
+import json
+from collections import defaultdict
+
 from rtg.ga.calculate_fitness import fitness_evaluation
 from rtg.ga.crossover import crossover
 from rtg.ga.initialization import initialization
@@ -9,6 +12,13 @@ from rtg.settings import NUM_GENERATIONS, TEST_CASES
 
 LMUL: list[float] = [1 / 4, 1 / 2, 1.0, 2.0, 4.0, 8.0]
 SEW = [8, 16, 32]
+
+INDIVIDUALS_FITNESS_SCORE: dict[str, dict[int, float]] = defaultdict(
+    lambda: defaultdict(float)
+)
+FIRST_GEN: str = "FIRST GENERATION"
+FINAL_GEN: str = "FINAL GENERATION"
+FITNESS_SCORE_JSON: str = "./rtg/fitness_score.json"
 
 
 def genetic_algorithm():
@@ -23,6 +33,10 @@ def genetic_algorithm():
 
         # Sort the population in decreasing order of fitness score
         population = sorted(population, key=lambda x: x.fitness, reverse=True)
+
+        if i == 0:
+            for j in range(len(population)):
+                INDIVIDUALS_FITNESS_SCORE[FIRST_GEN][j] = population[j].fitness
 
         # Generate new offsprings for new generation
         new_generation = []
@@ -47,6 +61,11 @@ def genetic_algorithm():
 
     fitness_evaluation(population)
     population = sorted(population, key=lambda x: x.fitness, reverse=True)
+
+    for j in range(len(population)):
+        INDIVIDUALS_FITNESS_SCORE[FINAL_GEN][j] = population[j].fitness
+    with open(FITNESS_SCORE_JSON, "w") as json_file:
+        json.dump(INDIVIDUALS_FITNESS_SCORE, json_file)
 
     for i in range(TEST_CASES):
         add_label_loop(population[i])

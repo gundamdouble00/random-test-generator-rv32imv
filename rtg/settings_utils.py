@@ -43,12 +43,19 @@ def check_data_text_segment(
 ) -> bool:
     text_end_in_byte: int = text_origin + text_size * 1024
     data_end_in_byte: int = data_origin + data_size * 1024
+    valid_memory_segment: bool = False
+    if (text_end_in_byte < data_origin) or (data_end_in_byte < text_origin):
+        valid_memory_segment = True
+
+    if not valid_memory_segment:
+        print("The Data segment and Text segment must not overlap!!!")
+        return False
 
     if (
         abs(text_origin - data_end_in_byte) <= 1024 * 2
         or abs(text_end_in_byte - data_origin) <= 1024 * 2
     ):
-        print("The Data segment and Text segment must be 1 KB apart!!!")
+        print("The Data segment and Text segment must be 1 KiB apart!!!")
         return False
 
     return True

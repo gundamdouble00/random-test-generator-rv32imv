@@ -2,76 +2,82 @@ Program 9
 Resuls: Passed
 
 Data Hazards:
-	Read after Write: 49
-	Write after Read: 19
-	Write after Write: 23
+	Read after Write: 81
+	Write after Read: 42
+	Write after Write: 43
 
 Instruction types in program:
-	Type V_OPCFG: 3 (Want: 3)
+	Type V_OPCFG: 4 (Want: 4)
 		- vsetivli: 3
+		- vsetvli: 1
 
-	Type V_OP_FAULT_ONLY_FIRST_LOADS: 3 (Want: 3)
-		- vle8ff.v: 1
-		- vle32ff.v: 1
-		- vle16ff.v: 1
-
-	Type V_OP_UNIT_STRIDE: 4 (Want: 3)
-		- vle16.v: 1
-		- vle8.v: 1
+	Type V_OP_UNIT_STRIDE: 5 (Want: 4)
 		- vlm.v: 1
-		- vse16.v: 1
+		- vle8.v: 1
+		- vle32.v: 1
+		- vsm.v: 1
+		- vse32.v: 1
 
-	Type V_OPIVV: 3 (Want: 3)
-		- vxor.vv: 1
-		- vmin.vv: 1
-		- vmadc.vv: 1
-
-	Type V_OPIVI: 4 (Want: 4)
-		- vmsleu.vi: 1
-		- vmsne.vi: 1
-		- vmseq.vi: 1
-		- vmerge.vim: 1
-
-	Type V_OPMVV: 4 (Want: 4)
-		- vdivu.vv: 1
-		- vdiv.vv: 2
-		- vmulhsu.vv: 1
-
-	Type I_OP_S: 3 (Want: 3)
-		- sw: 1
-		- sb: 2
-
-	Type V_OPIVX: 4 (Want: 4)
-		- vmaxu.vx: 2
-		- vsub.vx: 1
-		- vsll.vx: 1
+	Type I_OP_I: 3 (Want: 3)
+		- srai: 2
+		- xori: 1
 
 	Type I_OP_U: 3 (Want: 3)
-		- auipc: 3
+		- lui: 2
+		- auipc: 1
 
-	Type I_OP_I: 5 (Want: 3)
-		- slti: 2
-		- lb: 1
-		- andi: 1
-		- ori: 1
+	Type I_OP_S: 3 (Want: 3)
+		- sb: 2
+		- sh: 1
 
-	Type V_OPMVX: 4 (Want: 4)
-		- vwmaccsu.vx: 1
-		- vmacc.vx: 1
-		- vwsubu.vx: 1
+	Type V_OPMVV: 6 (Want: 6)
+		- vwmulu.vv: 3
+		- vwsub.vv: 1
+		- vwmulsu.vv: 1
+		- vmacc.vv: 1
+
+	Type V_OPIVI: 4 (Want: 4)
+		- vsll.vi: 2
+		- vsrl.vi: 1
+		- vrsub.vi: 1
+
+	Type V_OPMVX: 8 (Want: 6)
+		- vdiv.vx: 1
+		- vwaddu.vx: 1
+		- vwmulu.vx: 1
+		- vwadd.wx: 1
+		- vmulhsu.vx: 1
+		- vmul.vx: 1
 		- vrem.vx: 1
+		- vwsub.wx: 1
 
-	Type I_OP_J: 2 (Want: 2)
-		- jal: 2
+	Type V_OP_FAULT_ONLY_FIRST_LOADS: 5 (Want: 4)
+		- vle16ff.v: 2
+		- vle8ff.v: 2
+		- vle32ff.v: 1
 
-	Type I_OP_R: 4 (Want: 3)
-		- add: 1
-		- sltu: 2
-		- and: 1
+	Type I_OP_J: 3 (Want: 3)
+		- jal: 3
 
-	Type M_OP_M: 4 (Want: 3)
-		- rem: 1
-		- mulhsu: 1
-		- remu: 1
+	Type I_OP_R: 3 (Want: 3)
+		- sltu: 1
+		- or: 2
+
+	Type M_OP_M: 5 (Want: 4)
 		- mulhu: 1
+		- mul: 2
+		- divu: 1
+		- div: 1
+
+	Type V_OPIVV: 4 (Want: 4)
+		- vmin.vv: 1
+		- vmerge.vvm: 1
+		- vmsle.vv: 1
+		- vor.vv: 1
+
+	Type V_OPIVX: 4 (Want: 4)
+		- vmseq.vx: 1
+		- vminu.vx: 1
+		- vmsle.vx: 1
+		- vmaxu.vx: 1
 

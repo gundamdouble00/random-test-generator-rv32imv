@@ -24,6 +24,7 @@ UNSUCCESSFULL: str = "unsuccessfull"
 base_dir = os.path.dirname(os.path.abspath(__file__))
 linker_script = os.path.join(base_dir, "link.ld")
 num_programs: int = -1
+SPACE: str = " "
 
 
 def delete_old_files():
@@ -56,7 +57,7 @@ def compile_asm_files():
     - -nostdlib: No Standard Library\n
     - -static: Static Linker\n
     """
-    print("""RISC-V GNU Compiler Toolchain""")
+    print("""* RISC-V GNU Compiler Toolchain""")
 
     contents_in_dir = os.listdir(SPIKE_INPUTS)
     input_files: list[str] = []
@@ -104,7 +105,10 @@ def compile_asm_files():
             print(info)
             compile_failed += 1
 
-    print(f"Compilation unsuccessful: {compile_failed} programs")
+    print(
+        f"{SPACE * 4}- Compilation successful: {num_programs - compile_failed} programs"
+    )
+    print(f"{SPACE * 4}- Compilation unsuccessful: {compile_failed} programs")
 
 
 def running_spike_riscv_isa_sim(cmd: list[str], program_index: int):
@@ -130,8 +134,7 @@ def running_spike_riscv_isa_sim(cmd: list[str], program_index: int):
 
 
 def spike_executing():
-    print("\nSpike RISC-V ISA Simulator")
-
+    print("* Spike RISC-V ISA Simulator")
     origin_toml_path: Path = Path(__file__).resolve().parent / "rtg/ga/origin.toml"
     ORIGIN_TOML = load_config(origin_toml_path)
     if ORIGIN_TOML is None:
@@ -154,12 +157,9 @@ def spike_executing():
         ]
         for i in range(num_programs)
     ]
-
-    # print(" ".join(spike_cmd[0]))
     max_workers = os.cpu_count()
     if max_workers is not None:
         max_workers = max(1, max_workers // 2)
-
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
         result_iterator = executor.map(
             running_spike_riscv_isa_sim,
@@ -167,7 +167,6 @@ def spike_executing():
             [i for i in range(num_programs)],
         )
         results = list(result_iterator)
-
     execute_failed: int = 0
     for info in results:
         messages: list[str] = info.split()
@@ -176,23 +175,24 @@ def spike_executing():
             print(info)
             execute_failed += 1
 
-    print(f"Execution unsuccessful: {execute_failed} programs")
+    print(
+        f"{SPACE * 4}- Execution successful: {num_programs - execute_failed} programs"
+    )
+    print(f"{SPACE * 4}- Execution unsuccessful: {execute_failed} programs\n")
 
 
 def main():
     # Delete old files in "bin_files" and "spike_log_files" folder
     delete_old_files()
-
     # Compile assembly files to binary files
     compile_asm_files()
-
     # Use multithread for running spike concurrently
     spike_executing()
 
 
 if __name__ == "__main__":
     start = time.time()
-    print("Starting Compiling and Executing")
+    print("-- Starting Compiling and Executing --\n")
     main()
     end = time.time()
-    print(f"Finished in {end - start:.2f} seconds.")
+    print(f"-- Finished in {end - start:.2f} seconds. --")

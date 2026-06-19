@@ -1,5 +1,5 @@
 TEST_CASES = 12 # The number of test cases
-PROGRAM_LEN = 50 # The length of the body program, it should be at least 50
+PROGRAM_LEN = 60 # The length of the body program, it should be at least 50
 
 # TEXT is the text memory, DATA is the data memory
 # ORIGIN is the base address of the current memory region. ORIGIN must be a "hex" string
@@ -8,7 +8,7 @@ PROGRAM_LEN = 50 # The length of the body program, it should be at least 50
 ORIGIN = "0x20000000"
 SIZE = 32 # KiB
 [DATA]
-ORIGIN = "0x12000000"
+ORIGIN = "0x22000000"
 SIZE = 16 # KiB
 
 # The instructions are supported in the RTG
@@ -314,25 +314,25 @@ M_OP_M = [
 # The sum of rates must equal to 100
 [RV32_RATES]
 # RV32I Base Integer Instruction Set
-I_OP_R = 7
-I_OP_I = 7
-I_OP_S = 7
-I_OP_U = 7
+I_OP_R = 5
+I_OP_I = 5
+I_OP_S = 5
+I_OP_U = 5
 I_OP_B = 0
 I_OP_J = 5
 
 # M Extension for Integer Multiplication and Division
-M_OP_M = 7
+M_OP_M = 8
 
 # V Standard Extension for Vector Operations
 # Vector Integer Arithmetic Instructions
-V_OPIVV = 7
+V_OPIVV = 8
 V_OPIVX = 8
 V_OPIVI = 8
-V_OPMVV = 8
-V_OPMVX = 8
+V_OPMVV = 10
+V_OPMVX = 11
 # Configuration-Setting Instructions
-V_OPCFG = 7
+V_OPCFG = 8
 # Vector Loads and Stores
 # Unit-stride
 V_OP_UNIT_STRIDE = 7

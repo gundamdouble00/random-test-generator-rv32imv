@@ -7,6 +7,7 @@ from coverage_analyzer.analyzer.utils.read_log_files import (
     find_body_footer_address,
     get_executed_ins,
 )
+from coverage_analyzer.analyzer.utils.save_temp_data import save_to_json_file
 from coverage_analyzer.analyzer.utils.stress_cases import count_stress_cases
 from coverage_analyzer.analyzer.utils.write_reports import generate_reports
 from rtg.settings import PROGRAM_INS, RISCV_32_INS
@@ -16,32 +17,14 @@ FILE_NAME: str = "rv_assembly"
 LOG: str = ".log"
 OUTPUTS: str = "./outputs"
 SPIKE_LOG_FILES: str = OUTPUTS + "/spike_log_files"
-
 SUMMARY_FILE: str = "summary.txt"
+STREAMLIT: str = "streamlit"
+RUN: str = "run"
+STREAMLIT_DOT_PY: str = REPORTS_PATH + "analyzer/coverage.py"
+TEMP_DATA_JSON: str = "./coverage_analyzer/analyzer/temp_data.json"
 
 
-def main():
-    num_log_files: int = 0
-    for file_folder in Path(SPIKE_LOG_FILES).iterdir():
-        if Path.is_file(file_folder):
-            num_log_files += 1
-
-    log_files: list[LogFile] = [LogFile(i) for i in range(num_log_files)]
-    BODY_ADDR, FOOTER_ADDR = find_body_footer_address()
-    for i in range(num_log_files):
-        log_files[i].body_addr = BODY_ADDR
-        log_files[i].footer_addr = FOOTER_ADDR
-
-    get_executed_ins(log_files)
-
-    check_programs(log_files)
-
-    count_stress_cases(log_files)
-
-    generate_reports(log_files)
-
-    # Generate Summary Report
-
+def gen_summary_report(log_files: list[LogFile]):
     failed: int = 0
     data_hazards: dict[str, int] = defaultdict(int)
     riscv32_ins: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
@@ -80,6 +63,31 @@ def main():
             for num in riscv32_ins[type].values():
                 total += num
             _ = summary.write(f"\t\t- {type}: {total} instructions\n")
+
+
+def main():
+    num_log_files: int = 0
+    for file_folder in Path(SPIKE_LOG_FILES).iterdir():
+        if Path.is_file(file_folder):
+            num_log_files += 1
+
+    log_files: list[LogFile] = [LogFile(i) for i in range(num_log_files)]
+    BODY_ADDR, FOOTER_ADDR = find_body_footer_address()
+    for i in range(num_log_files):
+        log_files[i].body_addr = BODY_ADDR
+        log_files[i].footer_addr = FOOTER_ADDR
+
+    get_executed_ins(log_files)
+
+    check_programs(log_files)
+
+    count_stress_cases(log_files)
+
+    generate_reports(log_files)
+
+    gen_summary_report(log_files)
+
+    save_to_json_file(log_files)
 
 
 if __name__ == "__main__":
