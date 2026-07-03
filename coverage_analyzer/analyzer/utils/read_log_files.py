@@ -80,10 +80,10 @@ def find_body_footer_address() -> tuple[int, int]:
         if final_str == BODY_LABEL:
             body_addr = int(parts[0], 16)
             continue
+
         if FOOTER_LABEL in line:
             footer_addr = int(parts[0], 16)
             break
-
     return (body_addr, footer_addr)
 
 

@@ -318,7 +318,7 @@ I_OP_R = 5
 I_OP_I = 5
 I_OP_S = 5
 I_OP_U = 5
-I_OP_B = 0
+I_OP_B = 5
 I_OP_J = 5
 
 # M Extension for Integer Multiplication and Division
@@ -329,8 +329,8 @@ M_OP_M = 8
 V_OPIVV = 8
 V_OPIVX = 8
 V_OPIVI = 8
-V_OPMVV = 10
-V_OPMVX = 11
+V_OPMVV = 7
+V_OPMVX = 9
 # Configuration-Setting Instructions
 V_OPCFG = 8
 # Vector Loads and Stores

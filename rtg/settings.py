@@ -68,10 +68,6 @@ NUM_GENERATIONS = get_integer_value(RTG_CONFIG, "NUM_GENERATIONS")
 MUTATION_RATE = get_float_value(RTG_CONFIG, "MUTATION_RATE")
 CROSSOVER_RATE = get_float_value(RTG_CONFIG, "CROSSOVER_RATE")
 
-LOOP_N: int = 0
-# LOOP_N: int = random.randint(0, 3)
-LOOP_TIME: int = 0 if (LOOP_N <= 0) else (random.randint(1, 10))
-
 RISCV_32_INS = USER_CONFIG["RV32_INSTRUCTIONS"]
 RISCV_32_TYPES: dict[str, RISCVTypes] = {}
 for type, instructions in RISCV_32_INS.items():
@@ -98,9 +94,13 @@ PENALTY_PER_MISSING = get_integer_value(RTG_CONFIG, "PENALTY_PER_MISSING")
 
 settings: list[tuple[int, float]] = []
 instructions_per_path: int = -1
+v_sew: list[int] = [8, 16, 32]
+v_lmul: list[float] = [1 / 4, 1 / 2, 1, 2, 4, 8]
+vsetvl_vsew: int = 0
+vsetvl_vlmul: float = 0.0
+vsetvl_vma: int = random.randint(0, 1)
+vsetvl_vta: int = random.randint(0, 1)
 if HAS_VECTOR:
-    v_sew: list[int] = [8, 16, 32]
-    v_lmul: list[float] = [1 / 4, 1 / 2, 1, 2, 4, 8]
     vector_cfg_num: int = PROGRAM_INS[RISCVTypes.V_OPCFG]
     if vector_cfg_num == 0:
         vector_cfg_num = 1
@@ -111,4 +111,5 @@ if HAS_VECTOR:
         lmul = random.choice(v_lmul)
         if lmul >= (sew / 32):
             settings.append((sew, lmul))
+    vsetvl_vsew, vsetvl_vlmul = random.choice(settings)
 INSTRUCTIONS_PER_PATH = instructions_per_path

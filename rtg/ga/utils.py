@@ -2,60 +2,22 @@ import bisect
 import concurrent.futures
 import itertools
 import os
-import random
 from pathlib import Path
 
 from delete_all_files import execute_deletion
 from rtg.program.program import Program
 from rtg.program.utils import generate_data_segment, generate_footer, generate_header
-from rtg.rv_categories.registers import LOOP_CNT1, LOOP_CNT2
 from rtg.rv_categories.riscv_types import RISCVTypes
 from rtg.rv_instructions.integer.b_type import BTypeIns
 from rtg.settings import (
     DATA_ORIGIN,
     DATA_SIZE,
     HAS_VECTOR,
-    LOOP_N,
-    LOOP_TIME,
     PROGRAM_LEN,
     TEST_CASES,
     TEXT_ORIGIN,
     TEXT_SIZE,
 )
-
-haizz = ["blt", "bltu", "bge", "bgeu"]
-
-
-def create_loop(num: int):
-    """
-    addi x12, x0, 13\n
-    addi x26, x0, 26\n
-    loop:\n
-    \taddi x26, x26, -1\n
-    \tbge x26, x12, loop\n
-    """
-
-    # imm1 > imm2
-    ins_loop: str = random.choice(haizz)
-    imm1 = random.randint(10, 2047)
-    imm2 = imm1 - LOOP_TIME
-    reg1: str = f"x{LOOP_CNT1}"
-    reg2: str = f"x{LOOP_CNT2}"
-
-    result: list[str] = [
-        f"\taddi {reg1}, x0, {imm1}",
-        f"\taddi {reg2}, x0, {imm2}",
-        f"body_loop{num}:",
-    ]
-
-    if ins_loop.startswith("bge"):
-        result.append(f"\taddi {reg1}, {reg1}, -1")
-        result.append(f"\t{ins_loop} {reg1}, {reg2}, body_loop{num}")
-    else:
-        result.append(f"\taddi {reg2}, {reg2}, 1")
-        result.append(f"\t{ins_loop} {reg2}, {reg1}, body_loop{num}")
-
-    return result
 
 
 def write_to_file(
@@ -76,18 +38,10 @@ def write_to_file(
             _ = f.write(f"{instruction}\n")
 
         # Writing Body
-        loop_cnt: int = LOOP_N
         riscv_ins = individual.body
         for j in range(len(riscv_ins)):
             if j in individual.label:
                 _ = f.write(f"label{j}:\n")
-
-            # Add loop
-            if (j % 26) == 0 and loop_cnt > 0:
-                huhu = create_loop(loop_cnt)
-                for huhuhu in huhu:
-                    _ = f.write(f"{huhuhu}\n")
-                loop_cnt -= 1
 
             cur_ins = riscv_ins[j]
             if isinstance(cur_ins, BTypeIns):
@@ -98,6 +52,7 @@ def write_to_file(
                 else:
                     if individual.label[idx] == j:
                         idx += 1
+
                     if idx < len(individual.label):
                         cur_ins.label = f"label{individual.label[idx]}"
                     else:

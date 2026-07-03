@@ -12,6 +12,8 @@ from rtg.settings import (
     PROGRAM_LEN,
     RISCV_32_INS,
     settings,
+    vsetvl_vlmul,
+    vsetvl_vsew,
 )
 
 cfg_setting_ins: list[str] = ["vsetvli", "vsetivli"]
@@ -69,7 +71,7 @@ def generate_random_program(_: int):
         sew, lmul = SETTING[0], SETTING[1]
         cfg_ins: str = (
             "vsetvl"
-            if (sew == 32 and lmul == 1.0)
+            if (sew == vsetvl_vsew and lmul == vsetvl_vlmul)
             else (random.choice(cfg_setting_ins))
         )
         cfg_obj = ConfigurationSetting(cfg_ins, len(asm_program.body), lmul, sew)

@@ -26,7 +26,7 @@ TEMP_DATA_JSON: str = "./coverage_analyzer/analyzer/temp_data.json"
 
 def gen_summary_report(log_files: list[LogFile]):
     failed: int = 0
-    data_hazards: dict[str, int] = defaultdict(int)
+    data_hazards: dict[str, list[int]] = defaultdict(list)
     riscv32_ins: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
     for file in log_files:
         if not file.success:
@@ -48,12 +48,20 @@ def gen_summary_report(log_files: list[LogFile]):
             _ = summary.write(f'\t\t- "{type}" instructions: {coverage * 100:.2f}%\n')
 
         _ = summary.write("\n")
-        _ = summary.write("\tData Hazards:\n")
-        data_hazards = log_files[0].data_hazards
+        _ = summary.write("\tData Hazards (Median):\n")
         for file in log_files:
             for type, num in file.data_hazards.items():
-                data_hazards[type] = min(data_hazards[type], num)
-        for type, num in data_hazards.items():
+                data_hazards[type].append(num)
+        for type in data_hazards.keys():
+            data_hazards[type].sort()
+            data_hazard: list[int] = data_hazards[type]
+            n: int = len(data_hazard)
+            if n == 0:
+                num = 0
+            else:
+                num = data_hazard[(n - 1) // 2]
+                if n % 2 == 0:
+                    num = (num + data_hazard[n // 2]) // 2
             _ = summary.write(f"\t\t- {type}: {num}\n")
 
         _ = summary.write("\n")

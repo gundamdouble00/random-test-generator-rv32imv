@@ -10,27 +10,43 @@ from rtg.rv_categories.registers import (
     VECTOR_VSETVL,
     WORD_DATA_LABEL,
 )
-from rtg.settings import HAS_VECTOR, WORD_MEMORY
+from rtg.settings import (
+    HAS_VECTOR,
+    WORD_MEMORY,
+    vsetvl_vlmul,
+    vsetvl_vma,
+    vsetvl_vsew,
+    vsetvl_vta,
+)
 
-b_ins: list[str] = [
-    "beq",
-    "bne",
-    "blt",
-    "bge",
-    # "bltu",
-    # "bgeu",
-]
-
+b_ins: list[str] = ["beq", "bne", "blt", "bge"]
 DATA_SEGMENT: str = ".data"
 ALIGN_4: str = "\t.align 4"
-
 TEXT_SEGMENT: str = ".text"
 GLOBL: str = ".globl main"
 MAIN_LABEL: str = "main:"
 HEADER_LABEL: str = "header:"
-
-
+vsew: dict[int, str] = {
+    8: "000",
+    16: "001",
+    32: "010",
+    64: "011",
+}
+vlmul: dict[float, str] = {
+    1 / 4: "110",
+    1 / 2: "111",
+    1: "000",
+    2: "001",
+    4: "010",
+    8: "011",
+}
 gef_counter: int = 0  # gen_extra_func's counter
+
+
+def vsetvl_config() -> int:
+    vtype: str = f"{vsetvl_vma}{vsetvl_vta}{vsew[vsetvl_vsew]}{vlmul[vsetvl_vlmul]}"
+    decimal: int = int(vtype, 2)
+    return decimal
 
 
 def generate_extra_func() -> list[str]:
@@ -127,7 +143,7 @@ def generate_header() -> list[str]:
     program_header.extend(get_base_address(EXTRA_FUNC2_LABEL))
 
     if HAS_VECTOR:
-        program_header.append(f"\taddi x{VECTOR_VSETVL}, x0, 208")
+        program_header.append(f"\taddi x{VECTOR_VSETVL}, x0, {vsetvl_config()}")
         program_header.append(
             f"\tvsetvli {random.choice(ACTIVE_REG[1:])}, x1, e32, m8, tu, ma"
         )

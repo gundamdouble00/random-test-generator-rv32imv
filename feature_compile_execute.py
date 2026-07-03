@@ -48,7 +48,6 @@ def running_riscv_toolchain(command_list: list[str], program_index: int):
 def compile_asm_files():
     """
     Compiles assembly file to ELF files. Using "riscv32-linux-gcc"\n
-
     # riscv32-linux-gcc -T link.ld -march=rv32imv -mabi=ilp32 -nostdlib -static -o output.elf input.s\n
     - riscv32-linux-gcc: cross-compiler driver\n
     - -T link.ld: -T represents for Linker Script\n

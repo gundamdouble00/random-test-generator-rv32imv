@@ -6,6 +6,7 @@ from rtg.rv_categories.registers import ACTIVE_REG, BASE_MEM_ADDR, VECTOR_VSETVL
 from rtg.rv_categories.riscv_types import TYPE_OF_INS
 from rtg.rv_instructions.base_instruction import BaseVectorIns
 from rtg.rv_instructions.utils.get_eew import get_eew
+from rtg.settings import vsetvl_vlmul, vsetvl_vma, vsetvl_vsew, vsetvl_vta
 
 v_sew: list[int] = [8, 16, 32]
 v_lmul: list[float] = [1 / 4, 1 / 2, 1, 2, 4, 8]
@@ -99,10 +100,14 @@ class ConfigurationSetting(BaseVectorIns):
         else:
             self.src1 = f"{random.randint(1, 31)}"  # name == "vsetivli"
 
-        if (self.name == "vsetvl") and (self.lmul == 1.0) and (self.sew == 32):
+        if (
+            (self.name == "vsetvl")
+            and (self.lmul == vsetvl_vlmul)
+            and (self.sew == vsetvl_vsew)
+        ):
             self.src2: str = f"x{VECTOR_VSETVL}"
-            self.vta = "tu"
-            self.vma = "mu"
+            self.vta = "tu" if vsetvl_vta == 0 else "ta"
+            self.vma = "mu" if vsetvl_vma == 0 else "ma"
             return
 
         self.vta = random.choice(v_tail)

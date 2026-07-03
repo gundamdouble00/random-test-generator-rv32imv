@@ -1,81 +1,78 @@
 Program 4
-Resuls: Passed
+Resuls: Failed
 
 Data Hazards:
-	Read after Write: 18
-	Write after Read: 12
-	Write after Write: 13
+	Read after Write: 40
+	Write after Read: 18
+	Write after Write: 19
 
 Instruction types in program:
 	Type V_OPCFG: 4 (Want: 4)
-		- vsetivli: 3
 		- vsetvli: 1
+		- vsetivli: 2
+		- vsetvl: 1
 
-	Type V_OP_UNIT_STRIDE: 5 (Want: 4)
-		- vlm.v: 2
-		- vle8.v: 1
-		- vse8.v: 1
-		- vsm.v: 1
+	Type I_OP_I: 2 (Want: 3)
+		- srai: 1
+		- sltiu: 1
 
-	Type I_OP_I: 3 (Want: 3)
-		- jalr: 1
-		- andi: 1
-		- xori: 1
+	Type I_OP_R: 4 (Want: 3)
+		- sltu: 1
+		- add: 1
+		- sub: 1
+		- slt: 1
 
-	Type I_OP_U: 3 (Want: 3)
-		- lui: 3
+	Type V_OPIVV: 6 (Want: 4)
+		- vmsbc.vv: 2
+		- vand.vv: 1
+		- vmerge.vvm: 1
+		- vsra.vv: 1
+		- vmv.v.v: 1
+
+	Type V_OP_UNIT_STRIDE: 4 (Want: 4)
+		- vle16.v: 2
+		- vse32.v: 1
+		- vlm.v: 1
 
 	Type I_OP_S: 3 (Want: 3)
-		- sb: 3
+		- sb: 1
+		- sh: 2
 
-	Type V_OPMVV: 6 (Want: 6)
-		- vwmulu.vv: 2
-		- vwsub.wv: 1
-		- vwmulsu.vv: 1
-		- vwaddu.vv: 1
+	Type V_OPMVV: 5 (Want: 4)
+		- vwmaccu.vv: 1
+		- vremu.vv: 2
 		- vmacc.vv: 1
+		- vwaddu.wv: 1
 
-	Type V_OPIVI: 4 (Want: 4)
-		- vsll.vi: 1
-		- vsrl.vi: 1
-		- vmv.v.i: 1
-		- vrsub.vi: 1
-
-	Type V_OPMVX: 8 (Want: 6)
-		- vdiv.vx: 1
-		- vwaddu.vx: 1
-		- vwadd.wx: 2
-		- vnmsub.vx: 1
-		- vmul.vx: 1
-		- vwmaccu.vx: 1
-		- vwsub.wx: 1
-
-	Type V_OP_FAULT_ONLY_FIRST_LOADS: 5 (Want: 4)
-		- vle16ff.v: 1
-		- vle8ff.v: 3
-		- vle32ff.v: 1
+	Type V_OP_FAULT_ONLY_FIRST_LOADS: 4 (Want: 4)
+		- vle8ff.v: 2
+		- vle32ff.v: 2
 
 	Type I_OP_J: 3 (Want: 3)
 		- jal: 3
 
-	Type I_OP_R: 3 (Want: 3)
-		- sltu: 2
-		- or: 1
+	Type I_OP_U: 3 (Want: 3)
+		- auipc: 1
+		- lui: 2
 
-	Type M_OP_M: 5 (Want: 4)
-		- mulhu: 1
-		- rem: 1
-		- divu: 2
-		- remu: 1
+	Type V_OPIVI: 3 (Want: 4)
+		- vmadc.vim: 1
+		- vmseq.vi: 1
+		- vsll.vi: 1
 
-	Type V_OPIVV: 4 (Want: 4)
-		- vmin.vv: 1
-		- vsbc.vvm: 1
-		- vmsle.vv: 1
-		- vor.vv: 1
+	Type V_OPIVX: 2 (Want: 4)
+		- vsbc.vxm: 1
+		- vmv.v.x: 1
 
-	Type V_OPIVX: 4 (Want: 4)
-		- vmslt.vx: 1
-		- vadd.vx: 2
-		- vmsle.vx: 1
+	Type M_OP_M: 1 (Want: 4)
+		- mul: 1
+
+	Type I_OP_B: 1 (Want: 3)
+		- bge: 1
+
+	Type V_OPMVX: 4 (Want: 5)
+		- vwadd.vx: 1
+		- vremu.vx: 1
+		- vnmsac.vx: 1
+		- vwmul.vx: 1
 
