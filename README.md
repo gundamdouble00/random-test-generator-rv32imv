@@ -1,7 +1,9 @@
 # Graduation Thesis - Random Test Generator RV32IMV
 
 ## Introduction 
-This is my graduation thesis repository. Feel free to explore, use, or fork it for your own research.
+*This is my graduation thesis repository. Feel free to explore, use, or fork it for your own research.*
+
+This thesis presents the design and implementation of a test generation framework for processors based on the RISC-V RV32IMV instruction set architecture. The framework supports the generation of RISC-V assembly programs to verify and validate the functional correctness of RISC-V processors. By incorporating a genetic algorithm into the test case generation process, the framework is capable of producing diverse test cases with high code coverage. Additionally, a 'Coverage Analyzer' has been implemented to evaluate the quality and code coverage of the generated test cases.
 
 ## Installation
 1. **Install [pyenv](https://github.com/pyenv/pyenv)**
