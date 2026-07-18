@@ -9,7 +9,7 @@ ORIGIN = "0x20000000"
 SIZE = 32 # KiB
 [DATA]
 ORIGIN = "0x22000000"
-SIZE = 16 # KiB
+SIZE = 1 # KiB
 
 # The instructions are supported in the RTG
 # You can comment instructions which are not exist in your design
@@ -170,6 +170,7 @@ V_OPMVV = [
 ]
 
 V_OPMVX = [
+    # Vector Widening Integer Add/Subtract
     "vwaddu.vx",
     "vwsubu.vx",
     "vwadd.vx",
@@ -178,25 +179,30 @@ V_OPMVX = [
     "vwsubu.wx",
     "vwadd.wx",
     "vwsub.wx",
+    # Vector Widening Integer Multiply Instructions
     "vwmul.vx",
     "vwmulu.vx",
     "vwmulsu.vx",
+    # Vector Widening Integer Multiply-Add Instructions
     "vwmacc.vx",
+    "vwmaccu.vx",
     "vwmaccsu.vx",
     "vwmaccus.vx",
+    # Vector Single-Width Integer Multiply-Add Instructions
     "vmacc.vx",
     "vnmsac.vx",
     "vmadd.vx",
     "vnmsub.vx",
+    # Vector Single-Width Integer Multiply Instructions
     "vmul.vx",
     "vmulh.vx",
     "vmulhu.vx",
     "vmulhsu.vx",
+    # Vector Integer Divide Instructions
     "vdivu.vx",
     "vdiv.vx",
     "vremu.vx",
     "vrem.vx",
-    "vwmaccu.vx",
 ]
 
 V_OPCFG = [
@@ -314,11 +320,11 @@ M_OP_M = [
 # The sum of rates must equal to 100
 [RV32_RATES]
 # RV32I Base Integer Instruction Set
-I_OP_R = 5
-I_OP_I = 5
-I_OP_S = 5
-I_OP_U = 5
-I_OP_B = 5
+I_OP_R = 6
+I_OP_I = 6
+I_OP_S = 6
+I_OP_U = 6
+I_OP_B = 6
 I_OP_J = 5
 
 # M Extension for Integer Multiplication and Division
@@ -326,18 +332,18 @@ M_OP_M = 8
 
 # V Standard Extension for Vector Operations
 # Vector Integer Arithmetic Instructions
-V_OPIVV = 8
-V_OPIVX = 8
-V_OPIVI = 8
+V_OPIVV = 7
+V_OPIVX = 7
+V_OPIVI = 7
 V_OPMVV = 7
-V_OPMVX = 9
+V_OPMVX = 7
 # Configuration-Setting Instructions
-V_OPCFG = 8
+V_OPCFG = 7
 # Vector Loads and Stores
 # Unit-stride
 V_OP_UNIT_STRIDE = 7
 # Unit-stride Fault-Only-First Loads
-V_OP_FAULT_ONLY_FIRST_LOADS = 7
+V_OP_FAULT_ONLY_FIRST_LOADS = 8
 # Strided
 V_OP_STRIDED = 0
 # Indexed

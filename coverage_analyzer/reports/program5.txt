@@ -1,79 +1,78 @@
 Program 5
-Resuls: Failed
+Result: Failed
 
 Data Hazards:
-	Read after Write: 27
-	Write after Read: 14
-	Write after Write: 16
+	Read after Write: 52
+	Write after Read: 31
+	Write after Write: 29
 
 Instruction types in program:
 	Type V_OPCFG: 4 (Want: 4)
-		- vsetvli: 1
+		- vsetvl: 2
 		- vsetivli: 2
-		- vsetvl: 1
 
-	Type I_OP_I: 2 (Want: 3)
-		- srai: 1
-		- lhu: 1
+	Type I_OP_I: 3 (Want: 3)
+		- ori: 1
+		- lw: 1
+		- andi: 1
 
-	Type I_OP_R: 4 (Want: 3)
-		- sltu: 1
-		- sll: 1
-		- sub: 1
-		- slt: 1
+	Type I_OP_B: 3 (Want: 3)
+		- bne: 1
+		- bltu: 1
+		- beq: 1
 
-	Type V_OPIVV: 6 (Want: 4)
+	Type V_OPIVX: 3 (Want: 4)
+		- vnsra.wx: 1
+		- vmsgtu.vx: 1
+		- vmsbc.vx: 1
+
+	Type V_OPMVV: 4 (Want: 4)
+		- vwsubu.vv: 1
+		- vmadd.vv: 1
+		- vmulhu.vv: 1
+		- vwsubu.wv: 1
+
+	Type V_OPIVV: 4 (Want: 4)
 		- vmsbc.vv: 2
-		- vand.vv: 1
-		- vmerge.vvm: 1
-		- vsra.vv: 1
-		- vmv.v.v: 1
+		- vsub.vv: 1
+		- vxor.vv: 1
+
+	Type I_OP_U: 3 (Want: 3)
+		- lui: 2
+		- auipc: 1
 
 	Type V_OP_UNIT_STRIDE: 4 (Want: 4)
-		- vle16.v: 2
-		- vse32.v: 1
-		- vlm.v: 1
+		- vle8.v: 1
+		- vle16.v: 3
 
-	Type I_OP_S: 3 (Want: 3)
-		- sb: 1
-		- sh: 2
-
-	Type V_OPMVV: 5 (Want: 4)
-		- vwmaccu.vv: 1
-		- vremu.vv: 1
-		- vwmul.vv: 1
-		- vsext.vf2: 1
-		- vwaddu.wv: 1
-
-	Type V_OP_FAULT_ONLY_FIRST_LOADS: 4 (Want: 4)
-		- vle8ff.v: 3
-		- vle16ff.v: 1
+	Type V_OPMVX: 4 (Want: 4)
+		- vmacc.vx: 1
+		- vnmsac.vx: 1
+		- vwmul.vx: 1
+		- vwaddu.vx: 1
 
 	Type I_OP_J: 3 (Want: 3)
 		- jal: 3
 
-	Type I_OP_U: 3 (Want: 3)
-		- auipc: 1
-		- lui: 2
+	Type I_OP_S: 3 (Want: 3)
+		- sb: 1
+		- sh: 1
+		- sw: 1
 
-	Type V_OPIVI: 3 (Want: 4)
-		- vmadc.vim: 1
-		- vmseq.vi: 1
-		- vsll.vi: 1
+	Type V_OP_FAULT_ONLY_FIRST_LOADS: 1 (Want: 4)
+		- vle8ff.v: 1
 
-	Type V_OPIVX: 2 (Want: 4)
-		- vsbc.vxm: 1
-		- vmv.v.x: 1
-
-	Type M_OP_M: 1 (Want: 4)
+	Type M_OP_M: 3 (Want: 4)
 		- mul: 1
+		- mulhu: 1
+		- remu: 1
 
-	Type I_OP_B: 1 (Want: 3)
-		- bge: 1
+	Type V_OPIVI: 5 (Want: 4)
+		- vmsgtu.vi: 2
+		- vmerge.vim: 1
+		- vmadc.vi: 1
+		- vor.vi: 1
 
-	Type V_OPMVX: 4 (Want: 5)
-		- vwadd.vx: 1
-		- vremu.vx: 1
-		- vwmaccsu.vx: 1
-		- vwmul.vx: 1
+	Type I_OP_R: 1 (Want: 3)
+		- or: 1
 

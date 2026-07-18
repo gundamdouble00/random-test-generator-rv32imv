@@ -32,11 +32,10 @@ def generate_obj(current_type: str, current_index: int, lmul: float, sew: int):
                 riscv_obj = riscv_class(current_ins, current_index, lmul, sew)
             else:
                 riscv_obj = riscv_class(current_ins, current_index)
-            break
 
+            break
         except ValueError:
             continue
-
     return riscv_obj
 
 

@@ -2,40 +2,40 @@ Passed: 0 programs
 
 Coverage:
 	Percent:
-		- "I_OP_R" instructions: 80.00%
+		- "I_OP_R" instructions: 30.00%
 		- "I_OP_I" instructions: 33.33%
 		- "I_OP_S" instructions: 100.00%
 		- "I_OP_U" instructions: 100.00%
-		- "I_OP_B" instructions: 33.33%
+		- "I_OP_B" instructions: 83.33%
 		- "I_OP_J" instructions: 100.00%
 		- "M_OP_M" instructions: 50.00%
-		- "V_OPIVV" instructions: 35.71%
-		- "V_OPIVX" instructions: 12.90%
-		- "V_OPIVI" instructions: 42.86%
-		- "V_OPMVV" instructions: 40.00%
-		- "V_OPMVX" instructions: 22.22%
-		- "V_OPCFG" instructions: 100.00%
+		- "V_OPIVV" instructions: 25.00%
+		- "V_OPIVX" instructions: 16.13%
+		- "V_OPIVI" instructions: 47.62%
+		- "V_OPMVV" instructions: 16.67%
+		- "V_OPMVX" instructions: 33.33%
+		- "V_OPCFG" instructions: 66.67%
 		- "V_OP_UNIT_STRIDE" instructions: 50.00%
-		- "V_OP_FAULT_ONLY_FIRST_LOADS" instructions: 100.00%
+		- "V_OP_FAULT_ONLY_FIRST_LOADS" instructions: 66.67%
 
-	Data Hazards (Median):
-		- Read after Write: 36
-		- Write after Read: 14
-		- Write after Write: 19
+	Data Hazards:
+		- Read after Write: 55
+		- Write after Read: 36
+		- Write after Write: 29
 
 	Instructions:
-		- I_OP_R: 48 instructions
-		- I_OP_I: 25 instructions
-		- I_OP_S: 37 instructions
+		- I_OP_R: 12 instructions
+		- I_OP_I: 36 instructions
+		- I_OP_S: 36 instructions
 		- I_OP_U: 36 instructions
-		- I_OP_B: 12 instructions
-		- I_OP_J: 38 instructions
-		- M_OP_M: 15 instructions
-		- V_OPIVV: 73 instructions
-		- V_OPIVX: 24 instructions
-		- V_OPIVI: 38 instructions
-		- V_OPMVV: 60 instructions
-		- V_OPMVX: 49 instructions
+		- I_OP_B: 36 instructions
+		- I_OP_J: 36 instructions
+		- M_OP_M: 36 instructions
+		- V_OPIVV: 48 instructions
+		- V_OPIVX: 36 instructions
+		- V_OPIVI: 59 instructions
+		- V_OPMVV: 48 instructions
+		- V_OPMVX: 48 instructions
 		- V_OPCFG: 48 instructions
 		- V_OP_UNIT_STRIDE: 48 instructions
-		- V_OP_FAULT_ONLY_FIRST_LOADS: 48 instructions
+		- V_OP_FAULT_ONLY_FIRST_LOADS: 12 instructions

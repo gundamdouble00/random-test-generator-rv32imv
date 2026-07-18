@@ -19,6 +19,8 @@ from rtg.settings import (
     TEXT_SIZE,
 )
 
+BRANCH_STEP: int = min(PROGRAM_LEN // 3, 1023)
+
 
 def write_to_file(
     individual: Program,
@@ -45,8 +47,7 @@ def write_to_file(
 
             cur_ins = riscv_ins[j]
             if isinstance(cur_ins, BTypeIns):
-                # if riscv_ins[j].type == "i_b_type":
-                idx = bisect.bisect_left(individual.label, j)
+                idx: int = bisect.bisect_left(individual.label, j)
                 if idx >= len(individual.label):
                     cur_ins.label = "footer"
                 else:
@@ -100,7 +101,7 @@ def add_label_loop(individual: Program):
             is_vset = True
             individual.label.append(j)
 
-        if (j + 1) % 30 == 0 and (not is_vset):
+        if (j + 1) % BRANCH_STEP == 0 and (not is_vset):
             individual.label.append(j)
 
 

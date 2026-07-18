@@ -16,7 +16,7 @@ def write_report(log_file: LogFile):
         _ = f.write(f"Program {log_file.index}\n")
 
         result = "Passed" if log_file.success else "Failed"
-        _ = f.write(f"Resuls: {result}\n")
+        _ = f.write(f"Result: {result}\n")
 
         _ = f.write("\n")
         _ = f.write("Data Hazards:\n")

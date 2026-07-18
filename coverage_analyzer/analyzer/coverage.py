@@ -48,7 +48,7 @@ def gen_summary_report(log_files: list[LogFile]):
             _ = summary.write(f'\t\t- "{type}" instructions: {coverage * 100:.2f}%\n')
 
         _ = summary.write("\n")
-        _ = summary.write("\tData Hazards (Median):\n")
+        _ = summary.write("\tData Hazards:\n")
         for file in log_files:
             for type, num in file.data_hazards.items():
                 data_hazards[type].append(num)
